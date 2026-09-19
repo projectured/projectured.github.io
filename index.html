@@ -3,21 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ProjecturEd — a generic-purpose projectional editor</title>
-<meta name="description" content="ProjecturEd is a generic-purpose projectional editor. Keep your document as what it really is — a tree, a table, a graph — and project it into as many editable notations as you need.">
+<title>ProjecturEd — view, edit and transform structured data, with an AI assistant</title>
+<meta name="description" content="ProjecturEd is an application to view, edit and transform structured data with an AI assistant, and a generic user interface for any Julia program.">
 <meta name="theme-color" content="#f0f1f3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ProjecturEd — an AI-native projectional editor">
-<meta property="og:description" content="One structure, seen every way — and editable every way. Humans and AI edit trees, tables, and graphs through multiple, simultaneous, bidirectional projections.">
+<meta property="og:title" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
+<meta property="og:description" content="An application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
 <meta property="og:url" content="https://projectured.github.io">
 <meta property="og:image" content="https://projectured.github.io/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ProjecturEd — an AI-native projectional editor">
+<meta property="og:image:alt" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ProjecturEd — an AI-native projectional editor">
-<meta name="twitter:description" content="One structure, seen every way — and editable every way. Humans and AI edit one shared model.">
+<meta name="twitter:title" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
+<meta name="twitter:description" content="An application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
 <meta name="twitter:image" content="https://projectured.github.io/assets/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e1116'/%3E%3Ccircle cx='9' cy='16' r='2.4' fill='%235b7bff'/%3E%3Cg stroke='%235b7bff' stroke-width='1.6' fill='none'%3E%3Cpath d='M11 16 L23 8'/%3E%3Cpath d='M11 16 L23 16'/%3E%3Cpath d='M11 16 L23 24'/%3E%3C/g%3E%3Cg fill='%23e6e9ee'%3E%3Crect x='22' y='6' width='5' height='4' rx='1'/%3E%3Crect x='22' y='14' width='5' height='4' rx='1'/%3E%3Crect x='22' y='22' width='5' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E">
 <style>
@@ -374,24 +374,26 @@
   <section class="hero" style="border-top:0">
     <div class="wrap">
       <div class="hero__copy">
-        <p class="eyebrow">AI-native · generic-purpose projectional editor</p>
-        <h1>One structure,<br><span class="dim">seen every way</span> —<br>and <span class="hl">editable</span> every way.</h1>
+        <p class="eyebrow">an application · a generic user interface for Julia programs</p>
+        <h1>View, edit and transform<br><span class="dim">structured data</span> —<br>with an <span class="hl">AI assistant</span>.</h1>
         <p class="hero__lede">
-          ProjecturEd keeps your document as what it really is — a tree, a table, a graph — and
-          projects it into as many notations as you need. Edit any projection and the change
-          flows to every other view. Humans and AI work one shared model — and neither can break it.
+          ProjecturEd works with about twenty kinds of data, among them JSON, XML, Markdown, SQL,
+          Julia code, math, charts and state machines. It shows them in one window, and most views
+          take your edits: a change in a view changes the data, not a text copy of it. It is written
+          in Julia, so it is also a generic user interface for your own programs, and the AI
+          assistant inside it works on the same data, with the same edits, as you.
         </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="#idea">Explore the idea →</a>
           <a class="btn btn--ghost" href="mailto:projectured@gmail.com">Get in touch</a>
-          <a class="textlink" href="#showcase" style="margin-left:.4rem">watch it in motion ↓</a>
+          <a class="textlink" href="#showcase" style="margin-left:.4rem">see it ↓</a>
         </div>
       </div>
 
       <figure class="hero__shot" data-reveal>
-        <img src="assets/hero.jpg" width="1600" height="900" loading="eager" decoding="async"
-             alt="ProjecturEd building an M/M/1/K queueing study — prose and a rendered blocking-probability formula beside a results table and a chart, with the built-in AI assistant running the OMNeT++ simulation.">
-        <figcaption>the editor building an OMNeT++ study — assistant, math, tables, and charts in one document</figcaption>
+        <img src="assets/assistant.jpg" width="1600" height="1000" loading="eager" decoding="async"
+             alt="A conversation with the AI assistant inside ProjecturEd: the model reads a guide, searches the API, runs Julia code and shows each result, and the user runs code in the same conversation.">
+        <figcaption>a conversation with the assistant — it reads a guide, searches the API, runs Julia and shows each result</figcaption>
       </figure>
     </div>
   </section>
@@ -482,7 +484,7 @@
       <div class="caps">
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="22" height="22" rx="5"/><circle cx="16" cy="16" r="2.6" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="7.5" stroke-dasharray="2 3"/><path d="M16 5 v3 M16 24 v3 M5 16 h3 M24 16 h3" stroke-linecap="round"/></svg></div>
-          <h3>AI-native, fully reflective</h3>
+          <h3>An assistant on the same data</h3>
           <p>An AI edits the same living model you do — reading the document and the editor's own capabilities, targeting meaning, not line numbers. Like you, it can't produce an invalid edit.</p>
         </article>
         <article class="cap" data-reveal>
@@ -549,8 +551,8 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">AI integration</p>
-        <h2>Built for an AI collaborator — not bolted on.</h2>
-        <p>An assistant here isn't a plugin off to the side — it works the very same document you do. Because every action is an inspectable operation on shared structure, it sees the whole picture and changes it exactly the way a person would.</p>
+        <h2>The assistant works on the same data as you.</h2>
+        <p>The tools a model can call are a layer of the editor itself: it reads the data you are looking at, searches the API of the loaded packages, writes Julia and runs it, and changes the data with the same typed edits your key presses make. So Ctrl+Z takes back a change by the assistant like one of yours. It runs with a local model through Ollama or with Claude, and an external client gets the same tools over MCP.</p>
       </div>
 
       <div class="spotlight" data-reveal>
@@ -599,16 +601,14 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">See it in action</p>
-        <h2>One document: an AI assistant, a live simulation, math, tables, and charts.</h2>
-        <p>The current editor building an M/M/1/K queueing study end to end — prose, an OMNeT++ model,
-          a running simulation, and its results — composed live and driven by the built-in assistant.</p>
+        <h2>The conversation is a document, like everything else.</h2>
+        <p>A turn of the assistant is structured data: the text, each tool call with its arguments and its result,
+          each piece of Julia it ran. You can fold it, select it, copy it, and run code in it yourself.</p>
       </div>
       <figure class="showcase" data-reveal>
-        <video controls preload="none" playsinline poster="assets/mm1k-poster.jpg" width="1600" height="900">
-          <source src="assets/mm1k-demo.mp4" type="video/mp4">
-          Your browser can't play embedded video — <a href="assets/mm1k-demo.mp4">download the demo</a> instead.
-        </video>
-        <figcaption>the new, Julia-based ProjecturEd · an OMNeT++ study built entirely inside the editor</figcaption>
+        <img src="assets/assistant.jpg" width="1600" height="1000" loading="lazy" decoding="async"
+             alt="The assistant pane of ProjecturEd, with tool calls, evaluations and their results as foldable parts of the conversation.">
+        <figcaption>drawn by the editor itself — every picture on this page is</figcaption>
       </figure>
     </div>
   </section>
@@ -840,9 +840,9 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
             the ground up, far more capable, and in active development.
           </p>
           <p>
-            The successor is, in its own way, a proof of the thesis: roughly seventy thousand lines
-            built entirely through disciplined, AI-assisted development and automated self-testing —
-            not one of them written by hand.
+            The successor is, in its own way, a proof of the thesis: more than a hundred thousand
+            lines of Julia, built entirely through disciplined, AI-assisted development and automated
+            self-testing — not one of them written by hand.
           </p>
           <p>
             It runs today across native, terminal, and browser. If projectional editing is something
@@ -872,7 +872,8 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
   <div class="wrap">
     <div class="titleblock">
       <div class="tb"><div class="k">Project</div><div class="v">ProjecturEd</div></div>
-      <div class="tb"><div class="k">Discipline</div><div class="v">AI-native projectional editor</div></div>
+      <div class="tb"><div class="k">Discipline</div><div class="v">structured data, editable views, an AI assistant</div></div>
+      <div class="tb"><div class="k">Author</div><div class="v">Levente Mészáros</div></div>
       <div class="tb tb--live"><div class="k">Status</div><div class="v"><span class="live-dot"></span>In active development</div></div>
       <div class="tb"><div class="k">Contact</div><div class="v"><a href="mailto:projectured@gmail.com">projectured@gmail.com</a></div></div>
       <div class="tb"><div class="k">Original</div><div class="v"><a href="https://github.com/projectured/projectured-lisp" target="_blank" rel="noopener">projectured&#8203;/projectured-lisp</a></div></div>
