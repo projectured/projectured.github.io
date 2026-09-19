@@ -403,33 +403,23 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">The idea</p>
-        <h2>You don't edit text. You edit the thing the text is about.</h2>
+        <h2>The data is the source. A view is computed from it.</h2>
       </div>
       <div class="idea__body">
-        <p data-reveal>
-          A conventional editor stores your work as a flat string of characters and leaves the
-          structure — the objects, the relationships — implicit. ProjecturEd flips that around.
-          <strong>The document is the structure.</strong> What you see on screen is a
-          <em>projection</em> of it: one of possibly many notations, generated from the underlying data.
-        </p>
-        <p data-reveal>
-          Because each projection is generated, it can be anything — a block of JSON, an indented
-          outline, a spreadsheet, a wiring diagram, a page of formatted prose. And because ProjecturEd
-          knows how each projection was produced, it can run that mapping <strong>backwards</strong>:
-          your edits to the projection become edits to the data itself.
-        </p>
+        <p data-reveal>A text editor stores your work as a string of characters, and the structure is implicit. ProjecturEd stores the structure: a tree of typed Julia values. What is on the screen is a projection of that data, one of many possible notations, computed from it.</p>
+        <p data-reveal>A projection is a pair of functions. The printer makes the view, and records which part of the view came from which part of the data. The reader uses that record to turn an edit in the view into an operation on the data. So a view can be a block of JSON, an outline, a table, a diagram or formatted prose, and each one takes edits.</p>
       </div>
 
       <div class="contrast" data-reveal>
         <div>
           <span class="tag">A text editor</span>
-          <h3>Characters, structure implied</h3>
-          <p>Your data is a string. Structure lives only in your head and in fragile parsing. One notation, take it or leave it.</p>
+          <h3>A text editor</h3>
+          <p>The data is a string. A parser recovers the structure each time, and there is one notation.</p>
         </div>
         <div>
           <span class="tag this">ProjecturEd</span>
-          <h3>Structure, notation projected</h3>
-          <p>Your data is a tree, a table, a graph. Notations are projections of it — as many as you like, each one editable, all kept in sync.</p>
+          <h3>ProjecturEd</h3>
+          <p>The data is a tree, a table or a graph. Each notation is a projection of it. One piece of data can have several views, and an edit in one shows in the others.</p>
         </div>
       </div>
     </div>
@@ -440,7 +430,7 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Compared</p>
-        <h2>Two differences that actually matter.</h2>
+        <h2>Beside a fixed interface, and beside an assistant that edits text.</h2>
       </div>
       <div class="vs" data-reveal>
 
@@ -448,25 +438,25 @@
           <div class="vs__cell vs__cell--them">
             <span class="tag">Ordinary software</span>
             <h3>One fixed interface</h3>
-            <p>A spreadsheet gives you a grid; every other app gives you its own single way of working. Your data is forced into whatever shape the tool happens to offer — and copied into the next tool the moment you need a different one.</p>
+            <p>An application has one way to show its data: a grid, a form, a page. To see the data another way, you copy it into another tool.</p>
           </div>
           <div class="vs__cell vs__cell--this">
             <span class="tag this">ProjecturEd</span>
             <h3>The interface is a projection</h3>
-            <p>One model underneath; every view — grid, outline, form, diagram, dashboard — is a projection of it. Pick the one that fits, or build a new one. Nothing is duplicated, and every view stays in sync.</p>
+            <p>The views are projections of one model: a grid, an outline, a form, a diagram. You choose one or write a new one, and the data is not copied.</p>
           </div>
         </div>
 
         <div class="vs__row">
           <div class="vs__cell vs__cell--them">
             <span class="tag">Today's AI assistants</span>
-            <h3>They edit text</h3>
-            <p>The assistant writes characters and hopes the software reads them as intended. Structure is guessed after the fact, and breaks when the guess is wrong.</p>
+            <h3>An assistant that edits text</h3>
+            <p>The model writes characters, and a parser reads them back. A change that does not parse is found after the fact.</p>
           </div>
           <div class="vs__cell vs__cell--this">
             <span class="tag this">ProjecturEd</span>
-            <h3>It edits meaning</h3>
-            <p>The assistant works the same model you do — changing objects, relationships, and diagrams directly, never strings. Same operations, same model, same truth for you and the AI.</p>
+            <h3>An assistant that edits data</h3>
+            <p>The model changes the data with the same typed operations as your key presses: insert an element, replace a value, move the selection. The same tests cover both.</p>
           </div>
         </div>
 
@@ -479,68 +469,68 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Capabilities</p>
-        <h2>What a projectional editor makes possible.</h2>
+        <h2>What it does.</h2>
       </div>
       <div class="caps">
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="22" height="22" rx="5"/><circle cx="16" cy="16" r="2.6" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="7.5" stroke-dasharray="2 3"/><path d="M16 5 v3 M16 24 v3 M5 16 h3 M24 16 h3" stroke-linecap="round"/></svg></div>
           <h3>An assistant on the same data</h3>
-          <p>An AI edits the same living model you do — reading the document and the editor's own capabilities, targeting meaning, not line numbers. Like you, it can't produce an invalid edit.</p>
+          <p>A language model reads the document and the API of the loaded packages, and changes the data with operations, not with line numbers. It runs with a local model through Ollama, or with Claude.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="4" width="24" height="24" rx="3"/><circle cx="16" cy="16" r="8"/><path d="M16 11.5 l4 7 h-8 z" fill="currentColor" stroke="none"/></svg></div>
-          <h3>Arbitrarily mixable domains</h3>
-          <p>Put any content inside any other — a formula in a table cell, JSON inside prose. Navigation and editing cross the seams, and any fragment is a full document on its own.</p>
+          <h3>Domains nest</h3>
+          <p>A document of one domain can hold a document of another: a formula in a table cell, JSON inside prose. Navigation and editing cross the boundary, and any part is a document of its own.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="16" r="2.4" fill="currentColor" stroke="none"/><path d="M9 16 L25 7 M9 16 L25 16 M9 16 L25 25" stroke-linecap="round"/><rect x="24" y="5" width="5" height="4" rx="1" fill="currentColor" stroke="none"/><rect x="24" y="14" width="5" height="4" rx="1" fill="currentColor" stroke="none"/><rect x="24" y="23" width="5" height="4" rx="1" fill="currentColor" stroke="none"/></svg></div>
           <h3>Composable projections</h3>
-          <p>Notations compose like functions — chain them into pipelines, nest, sort, filter, or focus. Composition is predictable and well-defined: a sorted or filtered view is still fully editable, because each layer maps your edits back through the one beneath it.</p>
+          <p>Projections chain, nest, sort, filter and focus. A sorted or filtered view still takes edits, because each step maps an edit back through the step below it.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="7" width="16" height="12" rx="2"/><path d="M6.5 11 l2.5 2 -2.5 2" stroke-linecap="round"/><path d="M8 23 h6 M11 19 v4" stroke-linecap="round"/><rect x="21" y="11" width="8" height="15" rx="2"/></svg></div>
-          <h3>Runs everywhere</h3>
-          <p>The same editor, unchanged, in a native window, a terminal, or the browser — or headless, exporting print-quality PDF and images. Run it from source, or as a single standalone binary.</p>
+          <h3>Four backends</h3>
+          <p>The same views run in a native window, in a terminal and in a browser, and with no screen for tests. A view also goes to a vector PDF, a PNG or an MP4. It runs from source, or as a built binary that needs no Julia.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 h6 M8 7 v18 M8 16 h6 M8 25 h6 M20 7 h4 M20 16 h4 M20 25 h4"/></svg></div>
-          <h3>Structure, never text</h3>
-          <p>You edit the model directly, so you can't type a syntax error and the caret never lands anywhere meaningless. What's on screen is always the truth.</p>
+          <h3>Edits are operations</h3>
+          <p>An edit is a typed change of the data, so the data stays well formed. Type-in of single characters works in most domains, and not yet the same way in all of them.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 h6 l3 -9 4 15 3 -8 h8"/></svg></div>
           <h3>Incremental &amp; reactive</h3>
-          <p>Only what changed is recomputed, and only what's on screen is ever drawn — a ten-thousand-row document stays instant. Reactivity is fine-grained and opt-in: static, mutable, and reactive values mix freely, so you pay only for what truly has to recompute.</p>
+          <p>Each field of the data is a reactive cell. After a change, only the dependent parts of the views are computed again, and only the parts on the screen. A value is static, mutable or reactive, field by field.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="12"/><path d="M13 10.5 l9 5.5 -9 5.5 z" fill="currentColor" stroke="none"/></svg></div>
           <h3>Playback &amp; recording</h3>
-          <p>Drive any session from a script, then capture it — live playback, headless screenshots, and recorded video, with no display required.</p>
+          <p>A list of gestures drives a session from a script. The result goes to a screenshot or to a recorded video.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 l10 4 v7 c0 7 -5 10 -10 13 c-5 -3 -10 -6 -10 -13 v-7 z"/><path d="M11 16 l4 4 7 -8"/></svg></div>
-          <h3>Tested by construction</h3>
-          <p>A comprehensive automatic test suite exercises every projection, reader, and domain — built to rule out whole classes of errors, not chase them one at a time.</p>
+          <h3>Tests for every example</h3>
+          <p>The test suite walks every example: the printer output, the reader, and the navigation to each position. A static guard checks the layering of each package.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 7 h-3 a2 2 0 0 0 -2 2 v14 a2 2 0 0 0 2 2 h3 M19 7 h3 a2 2 0 0 1 2 2 v14 a2 2 0 0 1 -2 2 h-3"/><path d="M16 9 v14"/></svg></div>
-          <h3>Selection that knows what it is</h3>
-          <p>A selection points at a <em>thing</em>, not a stretch of characters — a spot between two letters, an XML attribute, a function argument, a table column, a whole chapter. It always knows where it is and what it means, so anything on screen can be selected and acted on.</p>
+          <h3>A selection is a path</h3>
+          <p>The selection is a path into the data: a position between two characters, an XML attribute, a function argument, a table column, a whole chapter. It survives a filter, a sort and a change elsewhere in the document.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="8" y="6" width="16" height="22" rx="2"/><rect x="12" y="4" width="8" height="4.5" rx="1.5"/><circle cx="13" cy="18" r="2.3"/><circle cx="19" cy="18" r="2.3"/><path d="M15.3 18 h1.4" stroke-linecap="round"/></svg></div>
-          <h3>Paste the same thing — not a copy</h3>
-          <p>Beyond ordinary copy and paste, you can note a piece and paste it by <em>identity</em>: it then lives in many places at once as literally one and the same thing, not duplicates. Edit it anywhere and every place changes together — and it's reclaimed automatically once the last use is gone. Almost no editor lets you do this.</p>
+          <h3>Paste the same object, or a copy</h3>
+          <p>Ctrl+N notes a part without a change of the document. A paste then puts the same object in a second place, so an edit in one place shows in both. Ctrl+Shift+V pastes a copy instead.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><rect x="18" y="5" width="9" height="9" rx="1.5"/><rect x="5" y="18" width="9" height="9" rx="1.5"/><rect x="18" y="18" width="9" height="9" rx="1.5" stroke-dasharray="2 2.4"/><path d="M22.5 20.6 v4 M20.5 22.6 h4"/></svg></div>
-          <h3>Extend it by composition</h3>
-          <p>Add your own domain and its projections — in your own project, or contributed back — and the rest already knows how to nest, navigate, and edit it. No forking, no central registry, so it scales cleanly across many collaborators.</p>
+          <h3>Your own domain</h3>
+          <p>A domain is a package of its own: document types, projections, operations and key bindings. No other domain depends on it, and the general features work on it: navigation, search, the clipboard, filtering, files, every backend and the assistant.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="22" height="22" rx="5"/><path d="M12.6 13 a3.4 3.4 0 1 1 4.8 3.1 c-1.2 .7 -1.4 1.4 -1.4 2.4"/><circle cx="16" cy="22.4" r="1" fill="currentColor" stroke="none"/></svg></div>
-          <h3>Help that fits the moment</h3>
-          <p>Ask what you can do right here and get a real answer: the actual operations available at the current selection, in the current context — not a static cheat-sheet you have to translate for yourself.</p>
+          <h3>F1 lists the keys that work here</h3>
+          <p>F1 shows the gestures that work at the current selection, computed from the projections in use. Ctrl+Shift+P runs a command by its name.</p>
         </article>
       </div>
     </div>
@@ -556,41 +546,41 @@
       </div>
 
       <div class="spotlight" data-reveal>
-        <p class="eyebrow eyebrow--plain">The bigger idea</p>
-        <h3>Your workspace, arranged on demand</h3>
-        <p>Because the assistant can build documents and views as fluently as it edits them, the interface itself becomes something you assemble on the fly. A dashboard stops being a fixed layout and turns into a real desk: you and the assistant lay out exactly the notations, tools, and data the task in front of you needs — and rearrange them the moment the task changes.</p>
+        <p class="eyebrow eyebrow--plain">Views on demand</p>
+        <h3>The assistant opens views</h3>
+        <p>The assistant can open a tab, arrange the panes, and build a card, a table or a form to show a result. So a window is put together for the task at hand, by you or by the assistant, from the same parts.</p>
       </div>
 
       <div class="caps">
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="14" cy="14" r="8"/><path d="M20 20 l6 6" stroke-linecap="round"/><path d="M14 11 v6 M11 14 h6" stroke-linecap="round"/></svg></div>
-          <h3>Introspection, built in</h3>
-          <p>The live document, the operations available right now, the projections in play, the editor's own interface — all of it is readable at runtime. The assistant discovers what it can do by inspection and self-documentation, rather than guessing.</p>
+          <h3>It reads the API at run time</h3>
+          <p>The tools search the modules, types and functions of the loaded packages by name, by pattern or by description, and read their documentation and the guides. The model finds a function before it calls it.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="24" height="20" rx="3"/><path d="M9 13 l4 3 -4 3"/><path d="M16 20 h7"/></svg></div>
           <h3>One tool: running code</h3>
-          <p>The assistant needs exactly one instrument — it runs code. Every change, whether to the data, the views, or the editor itself, is made by executing it, inside a sandbox that keeps the session safe.</p>
+          <p>The main tool runs Julia code in the process of the editor, with the editor bound to a variable. There is no fixed list of commands. It is not a sandbox: it is a tool for your own machine.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 12 a9 9 0 0 1 16 -3 l2.5 2.5 M25.5 6 v5 h-5"/><path d="M25 20 a9 9 0 0 1 -16 3 l-2.5 -2.5 M6.5 26 v-5 h5"/></svg></div>
-          <h3>It changes what — and how</h3>
-          <p>The assistant edits the data and the projections that present it: swap a notation, add a sorted or filtered view, restructure a document. Manipulating documents and their views is native, not a bolt-on.</p>
+          <h3>It changes data and views</h3>
+          <p>The assistant edits the data and the projections that show it: it can add a sorted or filtered view, swap a notation, or restructure a document.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 9 a2 2 0 0 1 2 -2 h16 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-9 l-5 4 v-4 h-2 a2 2 0 0 1 -2 -2 z"/><circle cx="12" cy="13.5" r="1.4" fill="currentColor" stroke="none"/><rect x="15.5" y="12" width="3.2" height="3.2" rx=".6"/><path d="M22.5 12.2 l1.6 1.3 -1.6 1.3" stroke-linecap="round"/></svg></div>
-          <h3>A conversation of anything</h3>
-          <p>The exchange with the assistant is itself a document, and it can hold whatever the two of you put there — a table, a formula, a diagram, a fragment of code — produced by the assistant or dropped in by you.</p>
+          <h3>The conversation holds documents</h3>
+          <p>The conversation is a document. A turn can hold a table, a formula, a diagram or code, made by the assistant or put there by you.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M14 4 l2.2 6.8 6.8 2.2 -6.8 2.2 -2.2 6.8 -2.2 -6.8 -6.8 -2.2 6.8 -2.2 z"/><path d="M24 20 l1 3 3 1 -3 1 -1 3 -1 -3 -3 -1 3 -1 z"/></svg></div>
-          <h3>Intent, not keystrokes</h3>
-          <p>Typing text character by character is the exception now, not the rule. You say what you want and let the assistant carry it out — then step in and edit directly, anywhere, whenever you choose.</p>
+          <h3>Ask, then edit</h3>
+          <p>You can ask for a change in plain words, and then edit the result by hand in the same view.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="16" r="4"/><circle cx="23" cy="16" r="4"/><path d="M13.5 13.5 h5 l-2 -2 M18.5 18.5 h-5 l2 2"/></svg></div>
-          <h3>Symmetric by design</h3>
-          <p>There is no separate "AI mode." Anything you can do, the assistant can do; anything it can do, you can do. One shared vocabulary of operations drives both.</p>
+          <h3>One set of operations</h3>
+          <p>There is no separate mode for the assistant. It uses the operations that your key presses use, and Ctrl+Z takes back a change of either.</p>
         </article>
       </div>
     </div>
@@ -618,8 +608,8 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Examples</p>
-        <h2>A few things it can do — and how little it takes.</h2>
-        <p>Each one is a real document or projection, rendered by the editor itself. The code shown is the interesting part.</p>
+        <h2>Examples, with the code that makes them.</h2>
+        <p>Each one is a document or a projection drawn by the editor. The code beside it is what makes it.</p>
       </div>
       <div class="examples-grid">
 
@@ -631,7 +621,7 @@
           </figure>
           <div class="ex__body">
             <h3>A rotating vector</h3>
-            <p>Animation for free: each coordinate is a cell that reads the clock, so the whole scene redraws itself every frame.</p>
+            <p>Each coordinate is a cell that reads the clock of the editor, so the scene is drawn again every frame.</p>
             <pre class="ex__code"><code><span class="c"># each animated value is a cell that reads the editor's clock,</span>
 <span class="c"># so the scene re-renders every frame</span>
 dot = GraphicsCircle(
@@ -649,8 +639,8 @@ GraphicsCanvas([background, ring, sin_chart, cos_chart, dot]; w, h)</code></pre>
                  alt="A 3x3 table with column headers A B C and row headers 1 2 3; the first row holds numbers and the next rows hold rendered math formulas.">
           </figure>
           <div class="ex__body">
-            <h3>A table of live math</h3>
-            <p>Cells aren't just values — they can be formulas that recompute as you edit. A table domain and a math domain, composed.</p>
+            <h3>A table with formulas</h3>
+            <p>A cell can hold a formula that is computed again when you edit. A table domain and a math domain, composed.</p>
             <pre class="ex__code"><code><span class="c"># a table widget whose cells can be live math, not just values</span>
 WidgetTable(Point2D(40, 40),
     [PrimitiveString("A"), PrimitiveString("B"), PrimitiveString("C")],
@@ -670,7 +660,7 @@ WidgetTable(Point2D(40, 40),
           </figure>
           <div class="ex__body">
             <h3>Sort without touching the data</h3>
-            <p>A sorted view is one extra projection in the pipeline. Remove it and the original order is back — nothing was mutated.</p>
+            <p>A sorted view is one more projection in the chain. Remove it, and the original order is back: the data was not changed.</p>
             <pre class="ex__code"><code><span class="c"># a sorted view is just one more projection in the pipeline —</span>
 <span class="c"># the underlying list is never reordered</span>
 ChainingProjection(
@@ -687,7 +677,7 @@ ChainingProjection(
           </figure>
           <div class="ex__body">
             <h3>Any object, as a form</h3>
-            <p>Point the reflective projection at a plain struct and get an editable form — text fields, checkboxes — with no UI code.</p>
+            <p>The reflection projection shows a plain struct as a form with text fields and checkboxes, with no user interface code.</p>
             <pre class="ex__code"><code><span class="c"># reflected into a form: the String becomes a text field,</span>
 <span class="c"># each Bool a checkbox — no interface code written</span>
 @document struct SearchSettings
@@ -704,8 +694,8 @@ end</code></pre>
                  alt="A mini SQL query tool: a split pane with a Query card holding the statement SELECT * FROM persons and an Execute button, beside a Results table of name and role rows (Ada/Lead, Bob/Engineer, Cleo/Ops).">
           </figure>
           <div class="ex__body">
-            <h3>A query tool, assembled</h3>
-            <p>Widgets and SQL in one document — the query and an Execute button on the left, its results table on the right. A split pane, a card, a button, a table, and a live SQL statement, composed together.</p>
+            <h3>A query tool from widgets and SQL</h3>
+            <p>Widgets and SQL in one document: the query and a button on the left, the result table on the right. A split pane, a card, a button, a table and an SQL statement, composed.</p>
             <pre class="ex__code"><code><span class="c"># a query tool from widgets + SQL — one document, both domains</span>
 WidgetSplitPane(:horizontal, [
     WidgetCard(title = "Query", content = CellVector([
@@ -723,8 +713,8 @@ WidgetSplitPane(:horizontal, [
                  alt="A graph of three node boxes connected by routed, labelled edges: a widget table (Name/Role, Ada/Lead), a JSON object (id 42, active true), and an XML node element — all placed automatically.">
           </figure>
           <div class="ex__body">
-            <h3>A graph that lays itself out</h3>
-            <p>Describe vertices and edges; it places the nodes and routes the connections for you. Each node here is a whole document in a different domain — a table, some JSON, an XML element.</p>
+            <h3>A graph with automatic layout</h3>
+            <p>You give the vertices and the edges; the layout engine places the nodes and routes the connections. Each node here is a document of another domain: a table, JSON, an XML element.</p>
             <pre class="ex__code"><code><span class="c"># nodes are whole documents — a table, some JSON, an XML element;</span>
 <span class="c"># describe vertices and edges, the layout &amp; routing are automatic</span>
 v_table = GraphVertex(table)   <span class="c"># table :: WidgetTable</span>
@@ -746,7 +736,7 @@ GraphGraph(
           </figure>
           <div class="ex__body">
             <h3>One function, three domains</h3>
-            <p>A Julia function whose body is an XML table — and the rows are a Julia loop. One document nests Julia ⊃ XML ⊃ Julia, each level editable in place. Server-side templating, without the string-mashing.</p>
+            <p>A Julia function whose body is an XML table, and the rows are a Julia loop. One document nests Julia, XML and Julia again, and each level takes edits in place.</p>
             <pre class="ex__code"><code><span class="c"># Julia and XML document constructors, combined into one tree</span>
 <span class="c"># (the editor renders it as the syntax shown alongside)</span>
 JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
@@ -774,8 +764,8 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Catalog</p>
-        <h2>Domains to edit — projections to view them.</h2>
-        <p>A document lives in a problem domain; a projection turns it into a notation. Both are open sets you extend — and because projections compose, any combination is fair game.</p>
+        <h2>Domains and projections.</h2>
+        <p>A document belongs to a domain, and a projection turns it into a notation. Both sets are open, and projections compose.</p>
       </div>
 
       <h3 class="cat-label" data-reveal>Domains</h3>
@@ -784,23 +774,25 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
         <span class="chip"><span class="dot"></span>XML</span>
         <span class="chip"><span class="dot"></span>YAML</span>
         <span class="chip"><span class="dot"></span>SQL</span>
-        <span class="chip"><span class="dot"></span>Source code · ASTs</span>
+        <span class="chip"><span class="dot"></span>Julia code, as a syntax tree</span>
         <span class="chip"><span class="dot"></span>Generic syntax <small>shared by JSON, XML, SQL &amp; code</small></span>
-        <span class="chip"><span class="dot"></span>Math</span>
-        <span class="chip"><span class="dot"></span>Prose &amp; Markdown</span>
+        <span class="chip"><span class="dot"></span>Math and formulas</span>
+        <span class="chip"><span class="dot"></span>Markdown and reStructuredText</span>
         <span class="chip"><span class="dot"></span>Styled text</span>
         <span class="chip"><span class="dot"></span>Tables</span>
-        <span class="chip"><span class="dot"></span>Diagrams &amp; graphs</span>
+        <span class="chip"><span class="dot"></span>Graphs with automatic layout</span>
+        <span class="chip"><span class="dot"></span>Charts and sequence charts</span>
+        <span class="chip"><span class="dot"></span>State machines and processes</span>
         <span class="chip"><span class="dot"></span>Graphics</span>
         <span class="chip"><span class="dot"></span>Icons</span>
         <span class="chip"><span class="dot"></span>Images</span>
         <span class="chip"><span class="dot"></span>Styles · fonts &amp; colors</span>
-        <span class="chip"><span class="dot"></span>A rich widget set</span>
-        <span class="chip"><span class="dot"></span>Layouts, incl. constraint-based</span>
-        <span class="chip"><span class="dot"></span>Filesystem</span>
-        <span class="chip"><span class="dot"></span>Version history</span>
+        <span class="chip"><span class="dot"></span>Widgets</span>
+        <span class="chip"><span class="dot"></span>Layouts, also by constraints</span>
+        <span class="chip"><span class="dot"></span>The file system</span>
+        <span class="chip"><span class="dot"></span>Version history and undo</span>
         <span class="chip"><span class="dot"></span>AI conversation</span>
-        <span class="chip"><span class="dot"></span>Workbench &amp; workspaces</span>
+        <span class="chip"><span class="dot"></span>Panes, tabs and tools</span>
         <span class="chip chip--soft"><span class="dot"></span>any object · reflected</span>
         <span class="chip chip--soft"><span class="dot"></span>… and combinations of them</span>
       </div>
@@ -821,7 +813,7 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
         <span class="chip"><span class="dot"></span>Recursion into parts</span>
         <span class="chip"><span class="dot"></span>Clipboard</span>
       </div>
-      <p class="cat-note" data-reveal>Stack them freely. Each notation <strong>builds on the ones beneath it</strong> — reusing their layout and their editing behaviour — so a sorted, filtered, or searched view stays fully editable, even in the middle of a nested search.</p>
+      <p class="cat-note" data-reveal>Each projection builds on the ones below it, and reuses their layout and their readers. So a sorted, filtered or searched view still takes edits.</p>
     </div>
   </section>
 
@@ -830,24 +822,17 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Lineage &amp; status</p>
-        <h2>A Common Lisp original — and a far more capable successor.</h2>
+        <h2>A Common Lisp original, and its successor in Julia.</h2>
       </div>
       <div class="status__body">
         <div data-reveal>
           <p>
-            ProjecturEd began as an open-source editor written in Common Lisp — its source is public,
-            and you can still watch it in action. The current editor is its successor: rebuilt from
-            the ground up, far more capable, and in active development.
+            ProjecturEd began as an editor written in Common Lisp, and its source is public. The
+            Julia version is a new implementation of the same idea, with more domains, more backends
+            and an AI assistant.
           </p>
-          <p>
-            The successor is, in its own way, a proof of the thesis: more than a hundred thousand
-            lines of Julia, built entirely through disciplined, AI-assisted development and automated
-            self-testing — not one of them written by hand.
-          </p>
-          <p>
-            It runs today across native, terminal, and browser. If projectional editing is something
-            you think about too — as a user, a builder, or a fellow traveller — get in touch.
-          </p>
+          <p>It is more than a hundred thousand lines of Julia, written through AI-assisted development with an automatic test suite. None of them was typed by hand.</p>
+          <p>It is under development. Most features work, and it is not a finished product: type-in is not the same in every domain, a table does not take an edit yet, and a click selects only where a view wires it. Write to us with a question, a problem or an idea.</p>
         </div>
         <div class="status__links" data-reveal>
           <a class="status__link" href="mailto:projectured@gmail.com">
