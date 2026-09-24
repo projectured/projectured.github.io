@@ -201,6 +201,7 @@
   .video-item h3 { font-family: var(--mono); font-size: 1rem; margin: 0; letter-spacing: -0.01em; }
   .video-item p { margin: .55rem 0 0; color: var(--ink-soft); font-size: var(--step-0); line-height: 1.5; max-width: 72ch; }
   .video-item p code { font-family: var(--mono); font-size: .92em; color: var(--ink); }
+  .video-item p a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
   .video-item .showcase { margin-top: 1.1rem; }
   .video-item .ex__code { margin-top: .7rem; max-width: 72ch; }
 
@@ -646,6 +647,27 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
            RecursiveProjection(SyntaxToText()),
            TextToGraphics(measure = measure_sdl_text)))</code></pre>
           <p>The window opens with the empty document selected. Press <code>{</code> to start.</p>
+          <p>The whole JSON domain is two short files:
+            <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonDocument.jl" target="_blank" rel="noopener"><code>JsonDocument.jl</code></a>
+            says what a JSON document is and what each key does to it, and
+            <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonToSyntax.jl" target="_blank" rel="noopener"><code>JsonToSyntax.jl</code></a>
+            says how it looks. They hold about 120 and 140 lines.</p>
+        </article>
+
+        <article class="video-item" data-reveal>
+          <h3>The rotating vector, form by form</h3>
+          <p>The evaluator runs Julia in the program. A canvas that a form returns draws as itself, and
+            it gets a pane of its own beside the evaluator. Each later form adds one part to it: a ring,
+            a dot that circles the ring, a sine and a cosine trace, the links from the dot, and the axes.
+            A part that moves takes a function where it moves, so it follows the clock, and the picture
+            changes in its pane while the forms are typed.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/rotating-vector-poster.jpg">
+              <source src="assets/videos/rotating-vector.mp4" type="video/mp4">
+            </video>
+            <figcaption>13 forms in under 2 minutes, from an empty evaluator</figcaption>
+          </figure>
         </article>
 
       </div>
