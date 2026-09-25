@@ -670,6 +670,26 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
           </figure>
         </article>
 
+        <article class="video-item" data-reveal>
+          <h3>A tool window from widgets</h3>
+          <p>The evaluator builds a small tool from widgets. The first forms make a cell, a button that
+            counts its presses in the cell, and a column that holds the button. An Alt+click selects the
+            button in its result row, Alt+Up selects the column around it, and a split and a paste give
+            the tool a pane of its own. Each later form adds widgets to the tool: a label that counts the
+            presses, a slider and a label that reads it, a text field, and a table of the three values. A
+            label or a table cell that takes a function follows what the function reads, so each widget
+            changes at once when the button is pressed or the slider is dragged.</p>
+          <p>The presses and the drags are mouse events from the same script as the keys, and the video
+            draws the pointer.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/widget-tool-poster.jpg">
+              <source src="assets/videos/widget-tool.mp4" type="video/mp4">
+            </video>
+            <figcaption>10 forms, 4 presses and 2 drags in 75 seconds</figcaption>
+          </figure>
+        </article>
+
       </div>
     </div>
   </section>
