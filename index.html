@@ -690,6 +690,29 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
           </figure>
         </article>
 
+        <article class="video-item" data-reveal>
+          <h3>Only what changes is painted again</h3>
+          <p>The window paints again only the parts of the screen that changed, and a red outline shows
+            them. The file is Markdown, and each paragraph is a block of its own, with its own chain of
+            projections. A click in the second paragraph paints the caret again, and the status line at
+            the bottom, which says where the caret is. Each typed key paints that paragraph and the status
+            line, and nothing else. When the paragraph grows by one line, the paragraphs below it move
+            down, and they are painted again at their new place. When it shrinks, they move up again.</p>
+          <p>The editor finds this without a comparison of pixels. Every value on the screen is a reactive
+            cell, and a key changes only the cells that depend on the text it edits. The backend paints
+            again the graphics whose cells changed, and the graphics that moved. In the video each outline
+            stays for 0.6 seconds, so that a repaint of a single frame can be seen.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/partial-render-poster.jpg">
+              <source src="assets/videos/partial-render.mp4" type="video/mp4">
+            </video>
+            <figcaption>A click and 132 keys in 30 seconds, in a Markdown file</figcaption>
+          </figure>
+          <p>To see the same outline in the program, open a Markdown file with the two switches on:</p>
+          <pre class="ex__code"><code>$ PROJECTURED_PARTIAL_RENDER=1 PROJECTURED_DEBUG_DIRTY=1 bin/projectured notes.md</code></pre>
+        </article>
+
       </div>
     </div>
   </section>
