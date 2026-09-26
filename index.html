@@ -168,6 +168,13 @@
     margin: 1.3rem 0 0; max-width: 44ch; color: var(--ink-soft);
     font-size: var(--step-1); line-height: 1.55;
   }
+  .hero__notice {
+    margin: 1.4rem 0 0; max-width: 52ch; padding: .8rem 1rem;
+    border: 1px solid var(--line); border-left: 3px solid var(--signal); border-radius: 7px;
+    background: var(--surface); color: var(--ink-soft);
+    font-size: var(--step-0); line-height: 1.5;
+  }
+  .hero__notice strong { color: var(--ink); }
   .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.9rem; align-items: center; }
   .btn {
     font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.02em;
@@ -386,6 +393,13 @@
       <div class="hero__copy">
         <p class="eyebrow">an application · a generic user interface for Julia programs</p>
         <h1>View, edit and transform<br><span class="dim">structured data</span> —<br>with an <span class="hl">AI assistant</span>.</h1>
+        <p class="hero__notice" role="note">
+          <strong>Status: under development.</strong> Most features work, but ProjecturEd is not a
+          finished product. Some parts are incomplete, and names and interfaces can still change.
+          The <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/requirement/delivery-roadmap.md" target="_blank" rel="noopener">roadmap</a>
+          lists what works today and what comes next. Problem reports and questions are welcome as
+          <a href="https://github.com/projectured/projectured-julia/issues" target="_blank" rel="noopener">GitHub issues</a>.
+        </p>
         <p class="hero__lede">
           ProjecturEd works with about twenty kinds of data, among them JSON, XML, Markdown, SQL,
           Julia code, math, charts and state machines. It shows them in one window, and most views
