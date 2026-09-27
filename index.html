@@ -252,6 +252,19 @@
   .contrast h3 { font-size: var(--step-1); margin: .5rem 0 .4rem; }
   .contrast p { margin: 0; color: var(--ink-soft); font-size: var(--step-0); }
 
+  /* uses */
+  .uses { display: grid; grid-template-columns: 1fr; gap: 1.6rem 2.4rem; margin-top: 2.4rem; }
+  @media (min-width: 760px) { .uses { grid-template-columns: 1fr 1fr; } }
+  .use { border-left: 2px solid var(--accent); padding-left: 1.1rem; }
+  .use h3 { font-size: 1rem; margin: 0 0 .4rem; letter-spacing: 0; }
+  .use p { margin: 0; color: var(--ink-soft); font-size: var(--step-0); line-height: 1.5; max-width: 60ch; }
+
+  /* try */
+  .try { margin-top: 2rem; max-width: 76ch; display: grid; gap: 1.1rem; }
+  .try p { margin: 0; color: var(--ink-soft); line-height: 1.55; }
+  .try p code { font-family: var(--mono); font-size: .92em; color: var(--ink); }
+  .try .ex__code { margin: 0; }
+
   /* comparison matrix */
   .vs { margin-top: 2.6rem; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
   .vs__row { display: grid; grid-template-columns: 1fr; }
@@ -378,10 +391,11 @@
     <a class="brand" href="#top">Projectur<b>Ed</b></a>
     <nav class="navlinks" aria-label="Primary">
       <a href="#idea">The idea</a>
-      <a href="#compare">Compared</a>
+      <a href="#uses">Uses</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#ai">AI</a>
       <a href="#videos">Videos</a>
+      <a href="#try">Try it</a>
       <a href="#examples">Build</a>
       <a href="#status">Status</a>
       <a href="https://github.com/projectured/projectured-julia" target="_blank" rel="noopener">GitHub</a>
@@ -442,6 +456,42 @@
           <h3>ProjecturEd</h3>
           <p>The data is a tree, a table or a graph. Each notation is a projection of it. One piece of data can have several views, and an edit in one shows in the others.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USES -->
+  <section id="uses">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Uses</p>
+        <h2>What you can do with it.</h2>
+      </div>
+      <div class="uses">
+        <article class="use" data-reveal>
+          <h3>View and edit structured files as structures</h3>
+          <p>JSON, YAML, XML, Markdown, reStructuredText, SQL, Julia and a math notation open, change and save through their own parsers.</p>
+        </article>
+        <article class="use" data-reveal>
+          <h3>Design a tool window without a GUI toolkit</h3>
+          <p>Widgets, tables, cards, tabs and split panes make a complete window. The window of ProjecturEd itself is made this way.</p>
+        </article>
+        <article class="use" data-reveal>
+          <h3>Look into a running Julia program</h3>
+          <p>A reflection view shows any object as a tree that opens one level at a time.</p>
+        </article>
+        <article class="use" data-reveal>
+          <h3>Show results</h3>
+          <p>Line, bar, histogram, scatter and strip charts, and sequence charts, are documents. You can select a data point like any other part.</p>
+        </article>
+        <article class="use" data-reveal>
+          <h3>Model behaviour and run it</h3>
+          <p>A state machine produces Julia code that runs. A process flowchart runs with breakpoints and a live trace.</p>
+        </article>
+        <article class="use" data-reveal>
+          <h3>Ask for a change in plain words</h3>
+          <p>The assistant searches the API, writes Julia and runs it in the editor. It works with a local model through Ollama, or with Claude.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -774,6 +824,35 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
           <pre class="ex__code"><code>$ PROJECTURED_PARTIAL_RENDER=1 PROJECTURED_DEBUG_DIRTY=1 bin/projectured notes.md</code></pre>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- TRY -->
+  <section id="try">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Try it</p>
+        <h2>Clone it, and run it.</h2>
+        <p>You need Julia 1.11 or later. A native window also needs SDL2 and SDL_ttf. The packages are not in
+          the General registry, so clone the repository.</p>
+      </div>
+      <div class="try" data-reveal>
+        <pre class="ex__code"><code>git clone https://github.com/projectured/projectured-julia
+cd projectured-julia
+bin/projectured</code></pre>
+        <p>The window opens with a file navigator on the left, the open files in tabs in the middle, and the
+          assistant on the right. To open files at once, name them on the command line:
+          <code>bin/projectured notes.md data.json</code>. The first start compiles the code, which takes some
+          minutes. Later starts are fast.</p>
+        <pre class="ex__code"><code>bin/projectured --help                   <span class="c"># every option</span>
+bin/projectured --backend=web a.json     <span class="c"># in a browser, at http://127.0.0.1:8080</span>
+bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTHROPIC_API_KEY first</span></code></pre>
+        <p>By default the assistant uses a local model through <a href="https://ollama.com" target="_blank" rel="noopener">Ollama</a>:
+          the Ollama server must run on your computer, and the model must be pulled.
+          <code>bin/build_projectured</code> compiles the application into a binary that runs without Julia.
+          The <a href="https://github.com/projectured/projectured-julia#quick-start" target="_blank" rel="noopener">quick start of the README</a>
+          has the details.</p>
       </div>
     </div>
   </section>
