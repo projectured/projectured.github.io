@@ -278,6 +278,11 @@
   }
   .loops figcaption { color: var(--ink-soft); font-size: var(--step-0); line-height: 1.55; max-width: 72ch; margin: 1.4rem auto 0; }
   .idea__still { margin-top: 2.6rem; }
+  .idea__shot { margin: 2.8rem 0 0; }
+  .idea__shot img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2); }
+  .idea__shot figcaption { color: var(--ink-soft); font-size: var(--step-0); line-height: 1.55; max-width: 72ch; margin: 1.2rem auto 0; }
+  .hero__about { max-width: 72ch; margin: 1.6rem auto 0; display: grid; gap: .9rem; }
+  .hero__about p { margin: 0; color: var(--ink-soft); line-height: 1.6; }
   .ex__body p a, .footnote a { color: inherit; }
 
   /* comparison matrix */
@@ -436,8 +441,9 @@
         <h1>One structure,<br><span class="dim">many editable views</span> —<br>with an <span class="hl">AI assistant</span>.</h1>
         <p class="hero__lede">
           ProjecturEd is an application to view and edit structured data: JSON, XML, Markdown, SQL,
-          Julia code, math, charts and more. Most views take your edits, and an edit in a view changes
-          the data, not a text copy of it. An AI assistant edits the same data with the same operations
+          Julia code, math, charts and more. It also takes your own data, with views that you define,
+          and one document can combine your data with all of these. Most views take your edits, and an
+          edit in a view changes the data, not a text copy of it. An AI assistant edits the same data with the same operations
           as you. It is written in Julia, so it is also a generic user interface for your own programs.
         </p>
         <div class="cta-row">
@@ -455,6 +461,20 @@
         </video>
         <figcaption>seven requests to a local model — a queue study, sixteen OMNeT++ runs, two charts, and the answer: a buffer of 13</figcaption>
       </figure>
+      <div class="hero__about" data-reveal>
+        <p>In this video a person types seven requests, and the AI assistant builds a study of an M/M/1/K
+          queue: how large must the buffer be to keep the blocking under 1 % at 80 % load? The assistant is
+          a local model, qwen3.8:27b, that Ollama runs on the same computer. It writes the network and the
+          configuration of an OMNeT++ model, and it puts the closed form into the study as formulas. It
+          runs the model at load 0.8 and a sweep of the buffer capacity from 1 to 15. Then it plots the
+          queue length and the drops, checks the simulation against the formula, and finds the answer: a
+          capacity of 13.</p>
+        <p>The study on the left is a document, and each step of the assistant is an edit of it. The
+          requests come from a script. The model is not scripted, and its code and its answers are its
+          own. The video plays at the speed of the session, and it waits a few seconds before each call
+          of the model, so the code can be read. The tool for OMNeT++ in the video is built on
+          ProjecturEd, and it is not in the public repository.</p>
+      </div>
     </div>
   </section>
 
@@ -637,6 +657,15 @@
           keyboard and the mouse. The editor and the assistant meet at tool calls and their results. The
           dashed arc is the conversation: you ask the assistant in plain words, and it answers. The
           conversation is a document in the editor too, so these words also pass through the editor.</figcaption>
+      </figure>
+
+      <figure class="idea__shot" data-reveal>
+        <img src="assets/examples/queue-study-check.jpg" width="1920" height="1080" loading="lazy" decoding="async"
+             alt="The queue study of the hero video after the sixth request. On the left, the study: the question, a plot of the queue length over time, and the expectation that the measured mean queue length agrees with the closed form within 10 %, marked as holds. On the right, the conversation: the request, the Julia code that the assistant wrote to make the plot and check the expectation, its result, and the next request.">
+        <figcaption>The loops at work, at 5:38 of the hero video. The study on the left is a document that the
+          assistant edits: it holds the question, a plot of the queue length, and the check of the formula
+          against the simulation, which holds. The conversation on the right shows the request, the code
+          that the model wrote, and its result.</figcaption>
       </figure>
 
       <article class="ex ex--wide idea__still" data-reveal>
