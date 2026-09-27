@@ -639,6 +639,28 @@
       <div class="videos">
 
         <article class="video-item" data-reveal>
+          <h3>The assistant edits a file</h3>
+          <p>A person asks the assistant to add Frank, 30, from Paris to <code>people.json</code>. The
+            assistant is a local model that Ollama runs on the same computer. It writes Julia and runs it
+            in the window: it reads the file, makes the new record, and inserts it with an edit, as a key
+            press does. The edit goes into the history of the file, so a click in the file and
+            <code>Ctrl+Z</code> take Frank back. The person then asks for a table of the people, sorted by
+            name, beside the file. The assistant reads the file again, finds five people, and opens the
+            table in a new pane.</p>
+          <p>The pane at the bottom is the gesture log of the window: each key of the person, and each
+            operation, also the one that the assistant made. The model is not scripted, and its answers are
+            its own. The video waits a few seconds before each call of the model, so the code can be read
+            before its result opens.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/assistant-edits-a-file-poster.jpg">
+              <source src="assets/videos/assistant-edits-a-file.mp4" type="video/mp4">
+            </video>
+            <figcaption>two requests, an undo and four runs of Julia in 137 seconds</figcaption>
+          </figure>
+        </article>
+
+        <article class="video-item" data-reveal>
           <h3>JSON from nothing</h3>
           <p>An empty document becomes a JSON object, typed with the keyboard alone. A key makes a typed
             element, not a character: <code>{</code> makes an object, <code>Tab</code> goes from a key to
