@@ -810,7 +810,7 @@
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 h6 M8 7 v18 M8 16 h6 M8 25 h6 M20 7 h4 M20 16 h4 M20 25 h4"/></svg></div>
           <h3>An edit keeps the data well formed</h3>
-          <p>An edit is a typed change of the data, so the data stays well formed. Type-in of single characters works in most domains, and not yet the same way in all of them.</p>
+          <p>An edit is a typed change of the data, so the structure stays well formed. Text that is not well formed yet has a place of its own: a hole in the document holds it as text. In a SQL or a Julia document, Enter parses the text of a hole into the tree. Text that does not parse stays in the hole, and you go on editing it. The conversation does the same for JSON, XML and Julia.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 h6 l3 -9 4 15 3 -8 h8"/></svg></div>
@@ -1092,6 +1092,12 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
           <code>bin/build_projectured</code> compiles the application into a binary that runs without Julia.
           The <a href="https://github.com/projectured/projectured-julia#quick-start" target="_blank" rel="noopener">quick start of the README</a>
           has the details.</p>
+        <p>You can also start from the Julia REPL. There are more than a hundred examples, and
+          <code>run_example</code> opens one in a window. The
+          <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/examples-tour.md" target="_blank" rel="noopener">examples tour</a> lists them.</p>
+        <pre class="ex__code"><code>$ julia --project=environment/all
+julia&gt; using Projectured, ProjecturedExample, ProjecturedSdl
+julia&gt; run_example("json")        <span class="c"># one example in a window</span></code></pre>
       </div>
     </div>
   </section>
