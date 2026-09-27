@@ -210,6 +210,20 @@
   .video-item .showcase { margin-top: 1.1rem; }
   .video-item .ex__code { margin-top: .7rem; max-width: 72ch; }
 
+  /* a domain in four parts */
+  .walk { margin-top: 2.6rem; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: clamp(1.3rem, 3vw, 2.1rem); }
+  .walk__title { font-size: var(--step-1); margin: 0; }
+  .walk__intro { color: var(--ink-soft); margin: .6rem 0 0; max-width: 76ch; line-height: 1.55; }
+  .walk__intro a, .walk__step p a { color: inherit; }
+  .walk__intro code, .walk__step p code { font-family: var(--mono); font-size: .9em; color: var(--ink); }
+  .walk__steps { display: grid; grid-template-columns: 1fr; gap: 1.8rem 2.2rem; margin-top: 1.7rem; }
+  @media (min-width: 900px) { .walk__steps { grid-template-columns: 1fr 1fr; } }
+  .walk__step { min-width: 0; }
+  .walk__step h4 { font-family: var(--mono); font-size: 1rem; margin: 0 0 .45rem; display: flex; gap: .6rem; align-items: baseline; }
+  .walk__step h4 span { color: var(--accent); }
+  .walk__step p { margin: 0; color: var(--ink-soft); font-size: var(--step-0); line-height: 1.5; }
+  .walk__step .ex__code { margin-top: .8rem; }
+
   /* ---------- examples ---------- */
   .examples-grid { display: grid; grid-template-columns: 1fr; gap: 1.4rem; margin-top: 2.6rem; align-items: start; }
   @media (min-width: 780px) { .examples-grid { grid-template-columns: 1fr 1fr; } }
@@ -1114,6 +1128,86 @@ julia&gt; run_example("json")        <span class="c"># one example in a window</
           <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/new-domain-guide.md" target="_blank" rel="noopener">Adding a new domain</a> and
           <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/view-your-data-guide.md" target="_blank" rel="noopener">A view of your own data</a>
           show how to add your own.</p>
+      </div>
+      <div class="walk" data-reveal>
+        <h3 class="walk__title">A domain in four parts</h3>
+        <p class="walk__intro">This is the JSON domain of ProjecturEd, cut down to its parts, and a domain of your
+          own has the same four. The whole domain is two files,
+          <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonDocument.jl" target="_blank" rel="noopener"><code>JsonDocument.jl</code></a> and
+          <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonToSyntax.jl" target="_blank" rel="noopener"><code>JsonToSyntax.jl</code></a>, and the
+          <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/new-domain-guide.md" target="_blank" rel="noopener">guide for a new domain</a>
+          builds one from the start.</p>
+        <div class="walk__steps">
+          <article class="walk__step">
+            <h4><span>1</span> The documents</h4>
+            <p>A document type is a Julia struct. <code>@document</code> makes each field a cell, so an edit writes
+              the cell and every view that reads it follows. A field with a default is optional.</p>
+            <pre class="ex__code"><code>@document struct JsonString &lt;: JsonDocument
+    value::String
+end
+
+@document struct JsonArray &lt;: JsonDocument
+    elements::CellVector = CellVector()
+    collapsed::Bool = false
+end</code></pre>
+          </article>
+          <article class="walk__step">
+            <h4><span>2</span> A projection</h4>
+            <p>A projection is a struct too. <code>@projection</code> declares its parameters, here the style of
+              the quotes and the style of the value.</p>
+            <pre class="ex__code"><code>@projection struct JsonStringToSyntaxLeaf
+    quote_style::ImmutableCell{StyleText} =
+        StyleText(font_ubuntu_monospace_regular_20, color_solarized_yellow)
+    value_style::ImmutableCell{StyleText} =
+        StyleText(font_ubuntu_monospace_regular_20, color_solarized_green)
+end</code></pre>
+          </article>
+          <article class="walk__step">
+            <h4><span>3</span> What the projection makes</h4>
+            <p>A template says what the projection makes from a document: here a syntax leaf with quotes around
+              the value. <code>@projection_template</code> makes the printer and the matching reader from it, and
+              <code>bound</code> ties the text to the field <code>value</code>, so an edit of the text writes the
+              string back. A projection can also be plain Julia code, with a printer and a reader of its own.</p>
+            <pre class="ex__code"><code>@projection_template JsonStringToSyntaxLeaf JsonString (prj, doc) -&gt;
+    SyntaxLeaf(bound(:value, String,
+                     make_hinted_text(() -&gt; json_escape(doc.value);
+                                      empty_thunk = () -&gt; isempty(doc.value),
+                                      placeholder = "enter json string",
+                                      style = prj.value_style));
+               open = TextString("\"", prj.quote_style),
+               close = TextString("\"", prj.quote_style))</code></pre>
+          </article>
+          <article class="walk__step">
+            <h4><span>4</span> The projections together</h4>
+            <p>One projection picks the projection for each document type. A chain then takes the JSON to
+              syntax, the syntax to text, and the text to graphics. <code>run_example</code> opens a document
+              with a projection in a window.</p>
+            <pre class="ex__code"><code>function JsonToSyntax()
+    TypeDispatchingProjection(
+        JsonNull        =&gt; JsonNullToSyntaxLeaf(),
+        JsonBool        =&gt; JsonBoolToSyntaxLeaf(),
+        JsonNumber      =&gt; JsonNumberToSyntaxLeaf(),
+        JsonString      =&gt; JsonStringToSyntaxLeaf(),
+        JsonArray       =&gt; JsonArrayToSyntaxNode(),
+        JsonObject      =&gt; JsonObjectToSyntaxNode(),
+        JsonInsertion   =&gt; JsonInsertionToSyntaxLeaf(),
+        JsonNothing     =&gt; InsertionNothingToSyntaxLeaf(),
+        JsonObjectEntry =&gt; JsonObjectEntryToSyntaxNode(),
+        Vector{Cell}    =&gt; CopyingProjection())
+end
+
+projection = ChainingProjection(
+    RecursiveProjection(JsonToSyntax()),
+    RecursiveProjection(SyntaxToText()),
+    TextToGraphics(measure = FontFileMeasure()))
+
+document = JsonObject(
+    "name" =&gt; JsonString("Alice"),
+    "tags" =&gt; JsonArray(JsonString("admin"), JsonString("editor")))
+
+run_example(document, projection)</code></pre>
+          </article>
+        </div>
       </div>
       <div class="examples-grid">
 
