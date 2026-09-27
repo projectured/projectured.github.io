@@ -1172,7 +1172,11 @@ end</code></pre>
             <p>A template says what the projection makes from a document: here a syntax leaf with quotes around
               the value. <code>@projection_template</code> makes the printer and the matching reader from it, and
               <code>bound</code> ties the text to the field <code>value</code>, so an edit of the text writes the
-              string back. A projection can also be plain Julia code, with a printer and a reader of its own.</p>
+              string back. A projection can also be plain Julia code. It has four entry points, and each one
+              works on one level: the printer makes the view, the reader turns an edit of the view into an
+              operation on the data, and two maps move a place, such as the selection, from the data to the
+              view and back. Each of the four hands every child to the projection of that child, so domains
+              nest and projections chain.</p>
             <pre class="ex__code"><code>@projection_template JsonStringToSyntaxLeaf JsonString (prj, doc) -&gt;
     SyntaxLeaf(bound(:value, String,
                      make_hinted_text(() -&gt; json_escape(doc.value);
