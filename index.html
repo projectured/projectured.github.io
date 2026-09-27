@@ -442,7 +442,7 @@
         <p class="hero__lede">
           ProjecturEd is an application to view and edit structured data, and it is made to be extended.
           You define your own data structures as documents and their views as projections, and one
-          document can combine them with every other kind of data. About twenty domains come with it,
+          document can combine them with other kinds of data. About twenty domains come with it,
           from JSON and Markdown to Julia code, math and charts. Most views take your edits: an edit in a
           view changes the data, not a text copy of it. An AI assistant edits the same data with the same
           operations as you. It is written in Julia, so it is also a user interface for your own programs.
@@ -767,16 +767,17 @@
       <div class="section-head" data-reveal>
         <p class="eyebrow">Capabilities</p>
         <h2>What it does.</h2>
-        <p>The assistant works on the same data as you. The other three multiply: each kind of data, yours
-          too, goes through each chain of projections to each backend.</p>
+        <p>The assistant works on the same data as you. The other three multiply: kinds of data, yours
+          too, chains of projections and backends combine in many ways, so one new part adds many new
+          combinations.</p>
       </div>
       <div class="spotlight" data-reveal>
         <p class="eyebrow eyebrow--plain">Made to be extended</p>
         <h3>Your data, your views</h3>
         <p>The domains that come with ProjecturEd are examples, not the limit. A domain of your own is a
           package: its document types, the projections that make its views, its operations and its key
-          bindings. No other domain depends on it, and it combines with all of them: your document can hold
-          a table or a formula, and theirs can hold yours. The general features work on it with little or no
+          bindings. No other domain depends on it, and it combines with the others where their structures
+          allow: your document can hold a table or a formula, and another document can hold yours. The general features work on it with little or no
           extra code: navigation, search, the clipboard, filtered and sorted views, files, every backend
           and the assistant, which can find and call your functions.</p>
         <p><a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/new-domain-guide.md" target="_blank" rel="noopener">Add a domain of your own</a> ·
