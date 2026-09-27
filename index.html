@@ -362,9 +362,6 @@
   @media (min-width: 820px) { .status__body { grid-template-columns: 1.4fr 1fr; gap: 3rem; } }
   .status__body p { margin: 0 0 1rem; color: var(--ink-soft); max-width: 58ch; }
   .status__body p strong { color: var(--ink); }
-  .status__limits { margin: 0 0 1.4rem; padding-left: 1.2rem; color: var(--ink-soft); max-width: 58ch; }
-  .status__limits li { margin: 0 0 .35rem; }
-  .status__limits li::marker { color: var(--signal); }
   .status__links { display: flex; flex-direction: column; gap: .9rem; }
   .status__link {
     display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
@@ -1291,15 +1288,8 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
             <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/requirement/delivery-roadmap.md" target="_blank" rel="noopener">roadmap</a>
             lists what works today and what comes next. Problem reports and questions are welcome as
             <a href="https://github.com/projectured/projectured-julia/issues" target="_blank" rel="noopener">GitHub issues</a>.</p>
-          <p>These limits are true today:</p>
-          <ul class="status__limits">
-            <li>Type-in of single characters does not work the same way in every domain.</li>
-            <li>A click selects where a projection wires it, and elsewhere it does nothing.</li>
-            <li>The assistant needs a local Ollama server with a pulled model, or an Anthropic API key.</li>
-            <li>The packages are not in the General registry, so you clone the repository.</li>
-            <li>A native window needs SDL2 and SDL_ttf.</li>
-            <li>Commercial use needs a licence from the author.</li>
-          </ul>
+          <p>Non-commercial use is free, and it includes changes to the code. Commercial use needs a
+            licence from the author.</p>
           <p>ProjecturEd began as an editor written in Common Lisp, and its source is public. The Julia
             version is a new implementation of the same idea, with more domains, more backends and an AI
             assistant.</p>
