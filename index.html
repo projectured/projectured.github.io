@@ -78,6 +78,35 @@
     --accent-soft:rgba(91,123,255,0.14); --signal:#ff6a52; --grid-dot:rgba(230,233,238,0.055);
   }
 
+  /* the colors of Julia code, which tool/highlight-julia.py marks */
+  :root {
+    --code-keyword: #1f3fcf; --code-type: #0b7a6c; --code-function: #7a3fbf; --code-macro: #b0336b;
+    --code-string: #2f7d32; --code-number: #b8450c; --code-symbol: #946100;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --code-keyword: #8aa0ff; --code-type: #4cc3b0; --code-function: #c4a1ff; --code-macro: #ff7ab6;
+      --code-string: #8bd17c; --code-number: #ff9e64; --code-symbol: #e3b341;
+    }
+  }
+  :root[data-theme="light"] {
+    --code-keyword: #1f3fcf; --code-type: #0b7a6c; --code-function: #7a3fbf; --code-macro: #b0336b;
+    --code-string: #2f7d32; --code-number: #b8450c; --code-symbol: #946100;
+  }
+  :root[data-theme="dark"] {
+    --code-keyword: #8aa0ff; --code-type: #4cc3b0; --code-function: #c4a1ff; --code-macro: #ff7ab6;
+    --code-string: #8bd17c; --code-number: #ff9e64; --code-symbol: #e3b341;
+  }
+  .j-keyword { color: var(--code-keyword); font-weight: 600; }
+  .j-type { color: var(--code-type); }
+  .j-function { color: var(--code-function); }
+  .j-macro { color: var(--code-macro); }
+  .j-string { color: var(--code-string); }
+  .j-number { color: var(--code-number); }
+  .j-symbol { color: var(--code-symbol); }
+  .j-comment { color: var(--ink-faint); font-style: italic; }
+  .j-prompt { color: var(--ink-faint); user-select: none; }
+
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -958,13 +987,13 @@
             <figcaption>115 keys in 32 seconds, from an empty document</figcaption>
           </figure>
           <p>To open the same editor from a Julia session with the ProjecturEd packages:</p>
-          <pre class="ex__code"><code>julia&gt; using Projectured, ProjecturedExample, ProjecturedSdl
+          <pre class="ex__code"><code class="language-julia"><span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">Projectured</span>, <span class="j-type">ProjecturedExample</span>, <span class="j-type">ProjecturedSdl</span>
 
-<span class="c"># an empty JSON document, drawn as JSON → syntax → text → graphics</span>
-julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
-           RecursiveProjection(JsonToSyntax()),
-           RecursiveProjection(SyntaxToText()),
-           TextToGraphics(measure = measure_sdl_text)))</code></pre>
+<span class="j-comment"># an empty JSON document, drawn as JSON → syntax → text → graphics</span>
+<span class="j-prompt">julia&gt; </span><span class="j-function">run_example</span>(<span class="j-type">JsonNothing</span>(selection = <span class="j-macro">@reference</span>), <span class="j-type">ChainingProjection</span>(
+           <span class="j-type">RecursiveProjection</span>(<span class="j-type">JsonToSyntax</span>()),
+           <span class="j-type">RecursiveProjection</span>(<span class="j-type">SyntaxToText</span>()),
+           <span class="j-type">TextToGraphics</span>(measure = measure_sdl_text)))</code></pre>
           <p>The window opens with the empty document selected. Press <code>{</code> to start.</p>
           <p>The whole JSON domain is two short files:
             <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonDocument.jl" target="_blank" rel="noopener"><code>JsonDocument.jl</code></a>
@@ -1114,9 +1143,9 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
         <p>You can also start from the Julia REPL. There are more than a hundred examples, and
           <code>run_example</code> opens one in a window. The
           <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/examples-tour.md" target="_blank" rel="noopener">examples tour</a> lists them.</p>
-        <pre class="ex__code"><code>$ julia --project=environment/all
-julia&gt; using Projectured, ProjecturedExample, ProjecturedSdl
-julia&gt; run_example("json")        <span class="c"># one example in a window</span></code></pre>
+        <pre class="ex__code"><code class="language-julia"><span class="j-prompt">$ </span>julia --project=environment/all
+<span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">Projectured</span>, <span class="j-type">ProjecturedExample</span>, <span class="j-type">ProjecturedSdl</span>
+<span class="j-prompt">julia&gt; </span><span class="j-function">run_example</span>(<span class="j-string">"json"</span>)        <span class="j-comment"># one example in a window</span></code></pre>
       </div>
     </div>
   </section>
@@ -1147,25 +1176,25 @@ julia&gt; run_example("json")        <span class="c"># one example in a window</
             <h4><span>1</span> The documents</h4>
             <p>A document type is a Julia struct. <code>@document</code> makes each field a cell, so an edit writes
               the cell and every view that reads it follows. A field with a default is optional.</p>
-            <pre class="ex__code"><code>@document struct JsonString &lt;: JsonDocument
-    value::String
-end
+            <pre class="ex__code"><code class="language-julia"><span class="j-macro">@document</span> <span class="j-keyword">struct</span> <span class="j-type">JsonString</span> &lt;: <span class="j-type">JsonDocument</span>
+    value::<span class="j-type">String</span>
+<span class="j-keyword">end</span>
 
-@document struct JsonArray &lt;: JsonDocument
-    elements::CellVector = CellVector()
-    collapsed::Bool = false
-end</code></pre>
+<span class="j-macro">@document</span> <span class="j-keyword">struct</span> <span class="j-type">JsonArray</span> &lt;: <span class="j-type">JsonDocument</span>
+    elements::<span class="j-type">CellVector</span> = <span class="j-type">CellVector</span>()
+    collapsed::<span class="j-type">Bool</span> = <span class="j-number">false</span>
+<span class="j-keyword">end</span></code></pre>
           </article>
           <article class="walk__step">
             <h4><span>2</span> A projection</h4>
             <p>A projection is a struct too. <code>@projection</code> declares its parameters, here the style of
               the quotes and the style of the value.</p>
-            <pre class="ex__code"><code>@projection struct JsonStringToSyntaxLeaf
-    quote_style::ImmutableCell{StyleText} =
-        StyleText(font_ubuntu_monospace_regular_20, color_solarized_yellow)
-    value_style::ImmutableCell{StyleText} =
-        StyleText(font_ubuntu_monospace_regular_20, color_solarized_green)
-end</code></pre>
+            <pre class="ex__code"><code class="language-julia"><span class="j-macro">@projection</span> <span class="j-keyword">struct</span> <span class="j-type">JsonStringToSyntaxLeaf</span>
+    quote_style::<span class="j-type">ImmutableCell</span>{<span class="j-type">StyleText</span>} =
+        <span class="j-type">StyleText</span>(font_ubuntu_monospace_regular_20, color_solarized_yellow)
+    value_style::<span class="j-type">ImmutableCell</span>{<span class="j-type">StyleText</span>} =
+        <span class="j-type">StyleText</span>(font_ubuntu_monospace_regular_20, color_solarized_green)
+<span class="j-keyword">end</span></code></pre>
           </article>
           <article class="walk__step">
             <h4><span>3</span> What the projection makes</h4>
@@ -1177,44 +1206,44 @@ end</code></pre>
               operation on the data, and two maps move a place, such as the selection, from the data to the
               view and back. Each of the four hands every child to the projection of that child, so domains
               nest and projections chain.</p>
-            <pre class="ex__code"><code>@projection_template JsonStringToSyntaxLeaf JsonString (prj, doc) -&gt;
-    SyntaxLeaf(bound(:value, String,
-                     make_hinted_text(() -&gt; json_escape(doc.value);
-                                      empty_thunk = () -&gt; isempty(doc.value),
-                                      placeholder = "enter json string",
+            <pre class="ex__code"><code class="language-julia"><span class="j-macro">@projection_template</span> <span class="j-type">JsonStringToSyntaxLeaf</span> <span class="j-type">JsonString</span> (prj, doc) -&gt;
+    <span class="j-type">SyntaxLeaf</span>(<span class="j-function">bound</span>(<span class="j-symbol">:value</span>, <span class="j-type">String</span>,
+                     <span class="j-function">make_hinted_text</span>(() -&gt; <span class="j-function">json_escape</span>(doc.value);
+                                      empty_thunk = () -&gt; <span class="j-function">isempty</span>(doc.value),
+                                      placeholder = <span class="j-string">"enter json string"</span>,
                                       style = prj.value_style));
-               open = TextString("\"", prj.quote_style),
-               close = TextString("\"", prj.quote_style))</code></pre>
+               open = <span class="j-type">TextString</span>(<span class="j-string">"\""</span>, prj.quote_style),
+               close = <span class="j-type">TextString</span>(<span class="j-string">"\""</span>, prj.quote_style))</code></pre>
           </article>
           <article class="walk__step">
             <h4><span>4</span> The projections together</h4>
             <p>One projection picks the projection for each document type. A chain then takes the JSON to
               syntax, the syntax to text, and the text to graphics. <code>run_example</code> opens a document
               with a projection in a window.</p>
-            <pre class="ex__code"><code>function JsonToSyntax()
-    TypeDispatchingProjection(
-        JsonNull        =&gt; JsonNullToSyntaxLeaf(),
-        JsonBool        =&gt; JsonBoolToSyntaxLeaf(),
-        JsonNumber      =&gt; JsonNumberToSyntaxLeaf(),
-        JsonString      =&gt; JsonStringToSyntaxLeaf(),
-        JsonArray       =&gt; JsonArrayToSyntaxNode(),
-        JsonObject      =&gt; JsonObjectToSyntaxNode(),
-        JsonInsertion   =&gt; JsonInsertionToSyntaxLeaf(),
-        JsonNothing     =&gt; InsertionNothingToSyntaxLeaf(),
-        JsonObjectEntry =&gt; JsonObjectEntryToSyntaxNode(),
-        Vector{Cell}    =&gt; CopyingProjection())
-end
+            <pre class="ex__code"><code class="language-julia"><span class="j-keyword">function</span> <span class="j-type">JsonToSyntax</span>()
+    <span class="j-type">TypeDispatchingProjection</span>(
+        <span class="j-type">JsonNull</span>        =&gt; <span class="j-type">JsonNullToSyntaxLeaf</span>(),
+        <span class="j-type">JsonBool</span>        =&gt; <span class="j-type">JsonBoolToSyntaxLeaf</span>(),
+        <span class="j-type">JsonNumber</span>      =&gt; <span class="j-type">JsonNumberToSyntaxLeaf</span>(),
+        <span class="j-type">JsonString</span>      =&gt; <span class="j-type">JsonStringToSyntaxLeaf</span>(),
+        <span class="j-type">JsonArray</span>       =&gt; <span class="j-type">JsonArrayToSyntaxNode</span>(),
+        <span class="j-type">JsonObject</span>      =&gt; <span class="j-type">JsonObjectToSyntaxNode</span>(),
+        <span class="j-type">JsonInsertion</span>   =&gt; <span class="j-type">JsonInsertionToSyntaxLeaf</span>(),
+        <span class="j-type">JsonNothing</span>     =&gt; <span class="j-type">InsertionNothingToSyntaxLeaf</span>(),
+        <span class="j-type">JsonObjectEntry</span> =&gt; <span class="j-type">JsonObjectEntryToSyntaxNode</span>(),
+        <span class="j-type">Vector</span>{<span class="j-type">Cell</span>}    =&gt; <span class="j-type">CopyingProjection</span>())
+<span class="j-keyword">end</span>
 
-projection = ChainingProjection(
-    RecursiveProjection(JsonToSyntax()),
-    RecursiveProjection(SyntaxToText()),
-    TextToGraphics(measure = FontFileMeasure()))
+projection = <span class="j-type">ChainingProjection</span>(
+    <span class="j-type">RecursiveProjection</span>(<span class="j-type">JsonToSyntax</span>()),
+    <span class="j-type">RecursiveProjection</span>(<span class="j-type">SyntaxToText</span>()),
+    <span class="j-type">TextToGraphics</span>(measure = <span class="j-type">FontFileMeasure</span>()))
 
-document = JsonObject(
-    "name" =&gt; JsonString("Alice"),
-    "tags" =&gt; JsonArray(JsonString("admin"), JsonString("editor")))
+document = <span class="j-type">JsonObject</span>(
+    <span class="j-string">"name"</span> =&gt; <span class="j-type">JsonString</span>(<span class="j-string">"Alice"</span>),
+    <span class="j-string">"tags"</span> =&gt; <span class="j-type">JsonArray</span>(<span class="j-type">JsonString</span>(<span class="j-string">"admin"</span>), <span class="j-type">JsonString</span>(<span class="j-string">"editor"</span>)))
 
-run_example(document, projection)</code></pre>
+<span class="j-function">run_example</span>(document, projection)</code></pre>
           </article>
         </div>
       </div>
@@ -1229,14 +1258,14 @@ run_example(document, projection)</code></pre>
           <div class="ex__body">
             <h3>A rotating vector</h3>
             <p>Each coordinate is a cell that reads the clock of the editor, so the scene is drawn again every frame.</p>
-            <pre class="ex__code"><code><span class="c"># each animated value is a cell that reads the editor's clock,</span>
-<span class="c"># so the scene re-renders every frame</span>
-dot = GraphicsCircle(
-    () -> cx + r*cos(angle(get_reactive_time(clock))),
-    () -> cy - r*sin(angle(get_reactive_time(clock))),
-    7, color_solarized_magenta)
+            <pre class="ex__code"><code class="language-julia"><span class="j-comment"># each animated value is a cell that reads the editor's clock,</span>
+<span class="j-comment"># so the scene re-renders every frame</span>
+dot = <span class="j-type">GraphicsCircle</span>(
+    () -&gt; cx + r*<span class="j-function">cos</span>(<span class="j-function">angle</span>(<span class="j-function">get_reactive_time</span>(clock))),
+    () -&gt; cy - r*<span class="j-function">sin</span>(<span class="j-function">angle</span>(<span class="j-function">get_reactive_time</span>(clock))),
+    <span class="j-number">7</span>, color_solarized_magenta)
 
-GraphicsCanvas([background, ring, sin_chart, cos_chart, dot]; w, h)</code></pre>
+<span class="j-type">GraphicsCanvas</span>([background, ring, sin_chart, cos_chart, dot]; w, h)</code></pre>
           </div>
         </article>
 
@@ -1248,15 +1277,15 @@ GraphicsCanvas([background, ring, sin_chart, cos_chart, dot]; w, h)</code></pre>
           <div class="ex__body">
             <h3>A table with formulas</h3>
             <p>A cell can hold a formula that is computed again when you edit. A table domain and a math domain, composed.</p>
-            <pre class="ex__code"><code><span class="c"># a table widget whose cells can be live math, not just values</span>
-WidgetTable(Point2D(40, 40),
-    [PrimitiveString("A"), PrimitiveString("B"), PrimitiveString("C")],
-    [PrimitiveString("1"), PrimitiveString("2"), PrimitiveString("3")],
-    [[PrimitiveNumber(10), PrimitiveNumber(20), PrimitiveNumber(30)],
-     <span class="c"># formulas, re-evaluated as you edit:</span>
-     [MathBinaryOperation(:+, MathVariable("A"), MathVariable("B")),
-      MathBinaryOperation(:*, PrimitiveNumber(2), MathVariable("B")),
-      MathBinaryOperation(:-, MathVariable("C"), PrimitiveNumber(5))]])</code></pre>
+            <pre class="ex__code"><code class="language-julia"><span class="j-comment"># a table widget whose cells can be live math, not just values</span>
+<span class="j-type">WidgetTable</span>(<span class="j-type">Point2D</span>(<span class="j-number">40</span>, <span class="j-number">40</span>),
+    [<span class="j-type">PrimitiveString</span>(<span class="j-string">"A"</span>), <span class="j-type">PrimitiveString</span>(<span class="j-string">"B"</span>), <span class="j-type">PrimitiveString</span>(<span class="j-string">"C"</span>)],
+    [<span class="j-type">PrimitiveString</span>(<span class="j-string">"1"</span>), <span class="j-type">PrimitiveString</span>(<span class="j-string">"2"</span>), <span class="j-type">PrimitiveString</span>(<span class="j-string">"3"</span>)],
+    [[<span class="j-type">PrimitiveNumber</span>(<span class="j-number">10</span>), <span class="j-type">PrimitiveNumber</span>(<span class="j-number">20</span>), <span class="j-type">PrimitiveNumber</span>(<span class="j-number">30</span>)],
+     <span class="j-comment"># formulas, re-evaluated as you edit:</span>
+     [<span class="j-type">MathBinaryOperation</span>(:+, <span class="j-type">MathVariable</span>(<span class="j-string">"A"</span>), <span class="j-type">MathVariable</span>(<span class="j-string">"B"</span>)),
+      <span class="j-type">MathBinaryOperation</span>(:*, <span class="j-type">PrimitiveNumber</span>(<span class="j-number">2</span>), <span class="j-type">MathVariable</span>(<span class="j-string">"B"</span>)),
+      <span class="j-type">MathBinaryOperation</span>(:-, <span class="j-type">MathVariable</span>(<span class="j-string">"C"</span>), <span class="j-type">PrimitiveNumber</span>(<span class="j-number">5</span>))]])</code></pre>
           </div>
         </article>
 
@@ -1268,11 +1297,11 @@ WidgetTable(Point2D(40, 40),
           <div class="ex__body">
             <h3>Sort without touching the data</h3>
             <p>A sorted view is one more projection in the chain. Remove it, and the original order is back: the data was not changed.</p>
-            <pre class="ex__code"><code><span class="c"># a sorted view is just one more projection in the pipeline —</span>
-<span class="c"># the underlying list is never reordered</span>
-ChainingProjection(
-    SortingProjection(by = x -> x.value),
-    <span class="c"># … then render the collection as text …</span>
+            <pre class="ex__code"><code class="language-julia"><span class="j-comment"># a sorted view is just one more projection in the pipeline —</span>
+<span class="j-comment"># the underlying list is never reordered</span>
+<span class="j-type">ChainingProjection</span>(
+    <span class="j-type">SortingProjection</span>(by = x -&gt; x.value),
+    <span class="j-comment"># … then render the collection as text …</span>
 )</code></pre>
           </div>
         </article>
@@ -1285,13 +1314,13 @@ ChainingProjection(
           <div class="ex__body">
             <h3>Any object, as a form</h3>
             <p>The reflection projection shows a plain struct as a form with text fields and checkboxes, with no user interface code.</p>
-            <pre class="ex__code"><code><span class="c"># reflected into a form: the String becomes a text field,</span>
-<span class="c"># each Bool a checkbox — no interface code written</span>
-@document struct SearchSettings
-    query::String
-    case_insensitive::Bool
-    whole_word::Bool
-end</code></pre>
+            <pre class="ex__code"><code class="language-julia"><span class="j-comment"># reflected into a form: the String becomes a text field,</span>
+<span class="j-comment"># each Bool a checkbox — no interface code written</span>
+<span class="j-macro">@document</span> <span class="j-keyword">struct</span> <span class="j-type">SearchSettings</span>
+    query::<span class="j-type">String</span>
+    case_insensitive::<span class="j-type">Bool</span>
+    whole_word::<span class="j-type">Bool</span>
+<span class="j-keyword">end</span></code></pre>
           </div>
         </article>
 
@@ -1303,14 +1332,14 @@ end</code></pre>
           <div class="ex__body">
             <h3>A query tool from widgets and SQL</h3>
             <p>Widgets and SQL in one document: the query and a button on the left, the result table on the right. A split pane, a card, a button, a table and an SQL statement, composed.</p>
-            <pre class="ex__code"><code><span class="c"># a query tool from widgets + SQL — one document, both domains</span>
-WidgetSplitPane(:horizontal, [
-    WidgetCard(title = "Query", content = CellVector([
-        SqlSelectStatement("persons"),          <span class="c"># SELECT * FROM persons</span>
-        WidgetButton(Point2D(0,0), Point2D(120,40), "Execute")])),
-    WidgetTitlePane("Results",
-        WidgetTable(["name", "role"], [],
-            [["Ada", "Lead"], ["Bob", "Engineer"], ["Cleo", "Ops"]]))])</code></pre>
+            <pre class="ex__code"><code class="language-julia"><span class="j-comment"># a query tool from widgets + SQL — one document, both domains</span>
+<span class="j-type">WidgetSplitPane</span>(<span class="j-symbol">:horizontal</span>, [
+    <span class="j-type">WidgetCard</span>(title = <span class="j-string">"Query"</span>, content = <span class="j-type">CellVector</span>([
+        <span class="j-type">SqlSelectStatement</span>(<span class="j-string">"persons"</span>),          <span class="j-comment"># SELECT * FROM persons</span>
+        <span class="j-type">WidgetButton</span>(<span class="j-type">Point2D</span>(<span class="j-number">0</span>,<span class="j-number">0</span>), <span class="j-type">Point2D</span>(<span class="j-number">120</span>,<span class="j-number">40</span>), <span class="j-string">"Execute"</span>)])),
+    <span class="j-type">WidgetTitlePane</span>(<span class="j-string">"Results"</span>,
+        <span class="j-type">WidgetTable</span>([<span class="j-string">"name"</span>, <span class="j-string">"role"</span>], [],
+            [[<span class="j-string">"Ada"</span>, <span class="j-string">"Lead"</span>], [<span class="j-string">"Bob"</span>, <span class="j-string">"Engineer"</span>], [<span class="j-string">"Cleo"</span>, <span class="j-string">"Ops"</span>]]))])</code></pre>
           </div>
         </article>
 
@@ -1322,17 +1351,17 @@ WidgetSplitPane(:horizontal, [
           <div class="ex__body">
             <h3>A graph with automatic layout</h3>
             <p>You give the vertices and the edges; the layout engine places the nodes and routes the connections. Each node here is a document of another domain: a table, JSON, an XML element.</p>
-            <pre class="ex__code"><code><span class="c"># nodes are whole documents — a table, some JSON, an XML element;</span>
-<span class="c"># describe vertices and edges, the layout &amp; routing are automatic</span>
-v_table = GraphVertex(table)   <span class="c"># table :: WidgetTable</span>
-v_json  = GraphVertex(json)    <span class="c"># json  :: JsonObject</span>
-v_xml   = GraphVertex(xml)     <span class="c"># xml   :: XmlElement</span>
+            <pre class="ex__code"><code class="language-julia"><span class="j-comment"># nodes are whole documents — a table, some JSON, an XML element;</span>
+<span class="j-comment"># describe vertices and edges, the layout &amp; routing are automatic</span>
+v_table = <span class="j-type">GraphVertex</span>(table)   <span class="j-comment"># table :: WidgetTable</span>
+v_json  = <span class="j-type">GraphVertex</span>(json)    <span class="j-comment"># json  :: JsonObject</span>
+v_xml   = <span class="j-type">GraphVertex</span>(xml)     <span class="j-comment"># xml   :: XmlElement</span>
 
-GraphGraph(
+<span class="j-type">GraphGraph</span>(
     [v_table, v_json, v_xml],
-    [GraphEdge(v_table, v_json; directed=true, label="uses"),
-     GraphEdge(v_json,  v_xml;  directed=true),
-     GraphEdge(v_table, v_xml;  directed=false)])</code></pre>
+    [<span class="j-type">GraphEdge</span>(v_table, v_json; directed=<span class="j-number">true</span>, label=<span class="j-string">"uses"</span>),
+     <span class="j-type">GraphEdge</span>(v_json,  v_xml;  directed=<span class="j-number">true</span>),
+     <span class="j-type">GraphEdge</span>(v_table, v_xml;  directed=<span class="j-number">false</span>)])</code></pre>
           </div>
         </article>
 
@@ -1344,21 +1373,21 @@ GraphGraph(
           <div class="ex__body">
             <h3>One function, three domains</h3>
             <p>A Julia function whose body is an XML table, and the rows are a Julia loop. One document nests Julia, XML and Julia again, and each level takes edits in place.</p>
-            <pre class="ex__code"><code><span class="c"># Julia and XML document constructors, combined into one tree</span>
-<span class="c"># (the editor renders it as the syntax shown alongside)</span>
-JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
-  JuliaBlock([
-    XmlElement("table", [XmlAttribute("class", "report")], [
-      XmlElement("tr", [XmlElement("th", [XmlText("Region")]),
-                        XmlElement("th", [XmlText("Revenue")])]),
-      JuliaFor([JuliaForIterator(JuliaIdentifier("row"),
-                                 JuliaIdentifier("rows"))],
-        JuliaBlock([
-          XmlElement("tr", [
-            XmlElement("td", [JuliaFieldAccess(JuliaIdentifier("row"),
-                                               JuliaIdentifier("region"))]),
-            XmlElement("td", [JuliaFieldAccess(JuliaIdentifier("row"),
-                                               JuliaIdentifier("revenue"))])])]))])]))</code></pre>
+            <pre class="ex__code"><code class="language-julia"><span class="j-comment"># Julia and XML document constructors, combined into one tree</span>
+<span class="j-comment"># (the editor renders it as the syntax shown alongside)</span>
+<span class="j-type">JuliaFunction</span>(<span class="j-type">JuliaIdentifier</span>(<span class="j-string">"report"</span>), [<span class="j-type">JuliaIdentifier</span>(<span class="j-string">"rows"</span>)],
+  <span class="j-type">JuliaBlock</span>([
+    <span class="j-type">XmlElement</span>(<span class="j-string">"table"</span>, [<span class="j-type">XmlAttribute</span>(<span class="j-string">"class"</span>, <span class="j-string">"report"</span>)], [
+      <span class="j-type">XmlElement</span>(<span class="j-string">"tr"</span>, [<span class="j-type">XmlElement</span>(<span class="j-string">"th"</span>, [<span class="j-type">XmlText</span>(<span class="j-string">"Region"</span>)]),
+                        <span class="j-type">XmlElement</span>(<span class="j-string">"th"</span>, [<span class="j-type">XmlText</span>(<span class="j-string">"Revenue"</span>)])]),
+      <span class="j-type">JuliaFor</span>([<span class="j-type">JuliaForIterator</span>(<span class="j-type">JuliaIdentifier</span>(<span class="j-string">"row"</span>),
+                                 <span class="j-type">JuliaIdentifier</span>(<span class="j-string">"rows"</span>))],
+        <span class="j-type">JuliaBlock</span>([
+          <span class="j-type">XmlElement</span>(<span class="j-string">"tr"</span>, [
+            <span class="j-type">XmlElement</span>(<span class="j-string">"td"</span>, [<span class="j-type">JuliaFieldAccess</span>(<span class="j-type">JuliaIdentifier</span>(<span class="j-string">"row"</span>),
+                                               <span class="j-type">JuliaIdentifier</span>(<span class="j-string">"region"</span>))]),
+            <span class="j-type">XmlElement</span>(<span class="j-string">"td"</span>, [<span class="j-type">JuliaFieldAccess</span>(<span class="j-type">JuliaIdentifier</span>(<span class="j-string">"row"</span>),
+                                               <span class="j-type">JuliaIdentifier</span>(<span class="j-string">"revenue"</span>))])])]))])]))</code></pre>
           </div>
         </article>
 
