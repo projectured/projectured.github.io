@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ProjecturEd — view, edit and transform structured data, with an AI assistant</title>
-<meta name="description" content="ProjecturEd is an application to view, edit and transform structured data with an AI assistant, and a generic user interface for any Julia program.">
+<meta name="description" content="ProjecturEd is a projectional editor written in Julia: an application to view and edit structured data with an AI assistant, and a generic user interface for any Julia program.">
 <meta name="theme-color" content="#f0f1f3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
-<meta property="og:description" content="An application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
+<meta property="og:description" content="A projectional editor written in Julia: an application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
 <meta property="og:url" content="https://projectured.github.io">
 <meta property="og:image" content="https://projectured.github.io/assets/og.png">
 <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
 <meta property="og:image:alt" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
-<meta name="twitter:description" content="An application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
+<meta name="twitter:description" content="A projectional editor written in Julia: an application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
 <meta name="twitter:image" content="https://projectured.github.io/assets/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e1116'/%3E%3Ccircle cx='9' cy='16' r='2.4' fill='%235b7bff'/%3E%3Cg stroke='%235b7bff' stroke-width='1.6' fill='none'%3E%3Cpath d='M11 16 L23 8'/%3E%3Cpath d='M11 16 L23 16'/%3E%3Cpath d='M11 16 L23 24'/%3E%3C/g%3E%3Cg fill='%23e6e9ee'%3E%3Crect x='22' y='6' width='5' height='4' rx='1'/%3E%3Crect x='22' y='14' width='5' height='4' rx='1'/%3E%3Crect x='22' y='22' width='5' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E">
 <style>
@@ -168,13 +168,8 @@
     margin: 1.3rem 0 0; max-width: 44ch; color: var(--ink-soft);
     font-size: var(--step-1); line-height: 1.55;
   }
-  .hero__notice {
-    margin: 1.4rem 0 0; max-width: 52ch; padding: .8rem 1rem;
-    border: 1px solid var(--line); border-left: 3px solid var(--signal); border-radius: 7px;
-    background: var(--surface); color: var(--ink-soft);
-    font-size: var(--step-0); line-height: 1.5;
-  }
-  .hero__notice strong { color: var(--ink); }
+  .eyebrow__link { color: inherit; text-decoration: none; border-bottom: 1px dashed var(--signal); }
+  .eyebrow__link:hover { color: var(--signal); }
   .cta-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.9rem; align-items: center; }
   .btn {
     font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.02em;
@@ -281,6 +276,12 @@
   .cap__icon svg { width: 100%; height: 100%; display: block; }
   .cap h3 { font-size: 1.02rem; margin: 0; letter-spacing: 0; }
   .cap p { margin: 0; color: var(--ink-soft); font-size: var(--step-0); line-height: 1.5; }
+  /* the last card fills the rest of its row, so no empty cell shows */
+  @media (min-width: 620px) and (max-width: 939px) { .caps > .cap:last-child:nth-child(odd) { grid-column: span 2; } }
+  @media (min-width: 940px) {
+    .caps > .cap:last-child:nth-child(3n+2) { grid-column: span 2; }
+    .caps > .cap:last-child:nth-child(3n+1) { grid-column: span 3; }
+  }
 
   /* spotlight callout */
   .spotlight {
@@ -321,6 +322,10 @@
   .status__body { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2.4rem; align-items: start; }
   @media (min-width: 820px) { .status__body { grid-template-columns: 1.4fr 1fr; gap: 3rem; } }
   .status__body p { margin: 0 0 1rem; color: var(--ink-soft); max-width: 58ch; }
+  .status__body p strong { color: var(--ink); }
+  .status__limits { margin: 0 0 1.4rem; padding-left: 1.2rem; color: var(--ink-soft); max-width: 58ch; }
+  .status__limits li { margin: 0 0 .35rem; }
+  .status__limits li::marker { color: var(--signal); }
   .status__links { display: flex; flex-direction: column; gap: .9rem; }
   .status__link {
     display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
@@ -376,11 +381,10 @@
       <a href="#compare">Compared</a>
       <a href="#capabilities">Capabilities</a>
       <a href="#ai">AI</a>
-      <a href="#showcase">Demo</a>
       <a href="#videos">Videos</a>
-      <a href="#examples">Examples</a>
-      <a href="#domains">Catalog</a>
-      <a href="#status">Lineage</a>
+      <a href="#examples">Build</a>
+      <a href="#status">Status</a>
+      <a href="https://github.com/projectured/projectured-julia" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </div>
 </header>
@@ -391,15 +395,8 @@
   <section class="hero" style="border-top:0">
     <div class="wrap">
       <div class="hero__copy">
-        <p class="eyebrow">an application · a generic user interface for Julia programs</p>
+        <p class="eyebrow">written in Julia · <a class="eyebrow__link" href="#status">under development</a></p>
         <h1>View, edit and transform<br><span class="dim">structured data</span> —<br>with an <span class="hl">AI assistant</span>.</h1>
-        <p class="hero__notice" role="note">
-          <strong>Status: under development.</strong> Most features work, but ProjecturEd is not a
-          finished product. Some parts are incomplete, and names and interfaces can still change.
-          The <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/requirement/delivery-roadmap.md" target="_blank" rel="noopener">roadmap</a>
-          lists what works today and what comes next. Problem reports and questions are welcome as
-          <a href="https://github.com/projectured/projectured-julia/issues" target="_blank" rel="noopener">GitHub issues</a>.
-        </p>
         <p class="hero__lede">
           ProjecturEd works with about twenty kinds of data, among them JSON, XML, Markdown, SQL,
           Julia code, math, charts and state machines. It shows them in one window, and most views
@@ -408,9 +405,9 @@
           assistant inside it works on the same data, with the same edits, as you.
         </p>
         <div class="cta-row">
-          <a class="btn btn--primary" href="#idea">Explore the idea →</a>
-          <a class="btn btn--ghost" href="mailto:projectured@gmail.com">Get in touch</a>
-          <a class="textlink" href="#showcase" style="margin-left:.4rem">see it ↓</a>
+          <a class="btn btn--primary" href="#try">Try it →</a>
+          <a class="btn btn--ghost" href="https://github.com/projectured/projectured-julia" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="textlink" href="#idea" style="margin-left:.4rem">see the idea ↓</a>
         </div>
       </div>
 
@@ -503,7 +500,7 @@
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="4" width="24" height="24" rx="3"/><circle cx="16" cy="16" r="8"/><path d="M16 11.5 l4 7 h-8 z" fill="currentColor" stroke="none"/></svg></div>
-          <h3>Domains nest</h3>
+          <h3>One document, many kinds of data</h3>
           <p>A document of one domain can hold a document of another: a formula in a table cell, JSON inside prose. Navigation and editing cross the boundary, and any part is a document of its own.</p>
         </article>
         <article class="cap" data-reveal>
@@ -513,12 +510,12 @@
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="3" y="7" width="16" height="12" rx="2"/><path d="M6.5 11 l2.5 2 -2.5 2" stroke-linecap="round"/><path d="M8 23 h6 M11 19 v4" stroke-linecap="round"/><rect x="21" y="11" width="8" height="15" rx="2"/></svg></div>
-          <h3>Four backends</h3>
+          <h3>A window, a terminal or a browser</h3>
           <p>The same views run in a native window, in a terminal and in a browser, and with no screen for tests. A view also goes to a vector PDF, a PNG or an MP4. It runs from source, or as a built binary that needs no Julia.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 h6 M8 7 v18 M8 16 h6 M8 25 h6 M20 7 h4 M20 16 h4 M20 25 h4"/></svg></div>
-          <h3>Edits are operations</h3>
+          <h3>An edit keeps the data well formed</h3>
           <p>An edit is a typed change of the data, so the data stays well formed. Type-in of single characters works in most domains, and not yet the same way in all of them.</p>
         </article>
         <article class="cap" data-reveal>
@@ -593,7 +590,7 @@
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 9 a2 2 0 0 1 2 -2 h16 a2 2 0 0 1 2 2 v9 a2 2 0 0 1 -2 2 h-9 l-5 4 v-4 h-2 a2 2 0 0 1 -2 -2 z"/><circle cx="12" cy="13.5" r="1.4" fill="currentColor" stroke="none"/><rect x="15.5" y="12" width="3.2" height="3.2" rx=".6"/><path d="M22.5 12.2 l1.6 1.3 -1.6 1.3" stroke-linecap="round"/></svg></div>
-          <h3>The conversation holds documents</h3>
+          <h3>A reply can hold a table, a formula or code</h3>
           <p>The conversation is a document. A turn can hold a table, a formula, a diagram or code, made by the assistant or put there by you.</p>
         </article>
         <article class="cap" data-reveal>
@@ -601,29 +598,7 @@
           <h3>Ask, then edit</h3>
           <p>You can ask for a change in plain words, and then edit the result by hand in the same view.</p>
         </article>
-        <article class="cap" data-reveal>
-          <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="16" r="4"/><circle cx="23" cy="16" r="4"/><path d="M13.5 13.5 h5 l-2 -2 M18.5 18.5 h-5 l2 2"/></svg></div>
-          <h3>One set of operations</h3>
-          <p>There is no separate mode for the assistant. It uses the operations that your key presses use, and Ctrl+Z takes back a change of either.</p>
-        </article>
       </div>
-    </div>
-  </section>
-
-  <!-- SHOWCASE -->
-  <section id="showcase">
-    <div class="wrap">
-      <div class="section-head" data-reveal>
-        <p class="eyebrow">See it in action</p>
-        <h2>The conversation is a document, like everything else.</h2>
-        <p>A turn of the assistant is structured data: the text, each tool call with its arguments and its result,
-          each piece of Julia it ran. You can fold it, select it, copy it, and run code in it yourself.</p>
-      </div>
-      <figure class="showcase" data-reveal>
-        <img src="assets/assistant.jpg" width="1600" height="1000" loading="lazy" decoding="async"
-             alt="The assistant pane of ProjecturEd, with tool calls, evaluations and their results as foldable parts of the conversation.">
-        <figcaption>drawn by the editor itself — every picture on this page is</figcaption>
-      </figure>
     </div>
   </section>
 
@@ -807,9 +782,11 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
   <section id="examples">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Examples</p>
+        <p class="eyebrow">Build with ProjecturEd</p>
         <h2>Examples, with the code that makes them.</h2>
-        <p>Each one is a document or a projection drawn by the editor. The code beside it is what makes it.</p>
+        <p>From here on, the page is for a developer. Each example is a document or a projection drawn by
+          the editor, and the Julia code beside it is what makes it. The catalog below lists the domains and
+          the projections that you can combine.</p>
       </div>
       <div class="examples-grid">
 
@@ -1021,20 +998,40 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
   <section id="status">
     <div class="wrap">
       <div class="section-head" data-reveal>
-        <p class="eyebrow">Lineage &amp; status</p>
-        <h2>A Common Lisp original, and its successor in Julia.</h2>
+        <p class="eyebrow">Status &amp; lineage</p>
+        <h2>Under development, and the successor of a Common Lisp editor.</h2>
       </div>
       <div class="status__body">
         <div data-reveal>
-          <p>
-            ProjecturEd began as an editor written in Common Lisp, and its source is public. The
-            Julia version is a new implementation of the same idea, with more domains, more backends
-            and an AI assistant.
-          </p>
+          <p><strong>Status: under development.</strong> Most features work, but ProjecturEd is not a
+            finished product. Some parts are incomplete, and names and interfaces can still change. The
+            <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/requirement/delivery-roadmap.md" target="_blank" rel="noopener">roadmap</a>
+            lists what works today and what comes next. Problem reports and questions are welcome as
+            <a href="https://github.com/projectured/projectured-julia/issues" target="_blank" rel="noopener">GitHub issues</a>.</p>
+          <p>These limits are true today:</p>
+          <ul class="status__limits">
+            <li>Type-in of single characters does not work the same way in every domain.</li>
+            <li>A table renders and navigates, but a cell does not take an edit.</li>
+            <li>A click selects where a projection wires it, and elsewhere it does nothing.</li>
+            <li>The assistant needs a local Ollama server with a pulled model, or an Anthropic API key.</li>
+            <li>The packages are not in the General registry, so you clone the repository.</li>
+            <li>A native window needs SDL2 and SDL_ttf.</li>
+            <li>Commercial use needs a licence from the author.</li>
+          </ul>
+          <p>ProjecturEd began as an editor written in Common Lisp, and its source is public. The Julia
+            version is a new implementation of the same idea, with more domains, more backends and an AI
+            assistant.</p>
           <p>It is more than a hundred thousand lines of Julia, written through AI-assisted development with an automatic test suite. None of them was typed by hand.</p>
-          <p>It is under development. Most features work, and it is not a finished product: type-in is not the same in every domain, a table does not take an edit yet, and a click selects only where a view wires it. Write to us with a question, a problem or an idea.</p>
         </div>
         <div class="status__links" data-reveal>
+          <a class="status__link" href="https://github.com/projectured/projectured-julia" target="_blank" rel="noopener">
+            <span>Source<small>Julia · on GitHub</small></span>
+            <span>↗</span>
+          </a>
+          <a class="status__link" href="https://github.com/projectured/projectured-julia/issues" target="_blank" rel="noopener">
+            <span>Report a problem<small>GitHub issues</small></span>
+            <span>↗</span>
+          </a>
           <a class="status__link" href="mailto:projectured@gmail.com">
             <span>Get in touch<small>Say hello · collaborate</small></span>
             <span>→</span>
@@ -1061,6 +1058,7 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
       <div class="tb"><div class="k">Author</div><div class="v">Levente Mészáros</div></div>
       <div class="tb tb--live"><div class="k">Status</div><div class="v"><span class="live-dot"></span>In active development</div></div>
       <div class="tb"><div class="k">Contact</div><div class="v"><a href="mailto:projectured@gmail.com">projectured@gmail.com</a></div></div>
+      <div class="tb"><div class="k">Source</div><div class="v"><a href="https://github.com/projectured/projectured-julia" target="_blank" rel="noopener">projectured&#8203;/projectured-julia</a></div></div>
       <div class="tb"><div class="k">Original</div><div class="v"><a href="https://github.com/projectured/projectured-lisp" target="_blank" rel="noopener">projectured&#8203;/projectured-lisp</a></div></div>
       <div class="tb"><div class="k">Sheet</div><div class="v">01 · landing</div></div>
     </div>
