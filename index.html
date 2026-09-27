@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ProjecturEd — one structure, many editable views, with an AI assistant</title>
-<meta name="description" content="ProjecturEd is a projectional editor written in Julia: an application to view and edit structured data with an AI assistant, and a generic user interface for any Julia program.">
+<meta name="description" content="ProjecturEd is a projectional editor written in Julia, made to be extended: define your own data structures and their views, combine them with the domains that come with it, and edit them with an AI assistant.">
 <meta name="theme-color" content="#f0f1f3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
@@ -440,11 +440,12 @@
         <p class="eyebrow">written in Julia · <a class="eyebrow__link" href="#status">under development</a></p>
         <h1>One structure,<br><span class="dim">many editable views</span> —<br>with an <span class="hl">AI assistant</span>.</h1>
         <p class="hero__lede">
-          ProjecturEd is an application to view and edit structured data: JSON, XML, Markdown, SQL,
-          Julia code, math, charts and more. It also takes your own data, with views that you define,
-          and one document can combine your data with all of these. Most views take your edits, and an
-          edit in a view changes the data, not a text copy of it. An AI assistant edits the same data with the same operations
-          as you. It is written in Julia, so it is also a generic user interface for your own programs.
+          ProjecturEd is an application to view and edit structured data, and it is made to be extended.
+          You define your own data structures as documents and their views as projections, and one
+          document can combine them with every other kind of data. About twenty domains come with it,
+          from JSON and Markdown to Julia code, math and charts. Most views take your edits: an edit in a
+          view changes the data, not a text copy of it. An AI assistant edits the same data with the same
+          operations as you. It is written in Julia, so it is also a user interface for your own programs.
         </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="#try">Try it →</a>
@@ -487,7 +488,7 @@
       </div>
       <div class="idea__body">
         <p data-reveal>A text editor stores your work as a string of characters, and the structure is implicit. ProjecturEd stores the structure: a tree of typed Julia values. What is on the screen is a projection of that data, one of many possible notations, computed from it.</p>
-        <p data-reveal>A projection is a pair of functions. The printer makes the view, and records which part of the view came from which part of the data. The reader uses that record to turn an edit in the view into an operation on the data. So a view can be a block of JSON, an outline, a table, a diagram or formatted prose, and each one takes edits.</p>
+        <p data-reveal>A projection is a pair of functions. The printer makes the view, and records which part of the view came from which part of the data. The reader uses that record to turn an edit in the view into an operation on the data. So a view can be a block of JSON, an outline, a table, a diagram or formatted prose, and each one takes edits. You can write a projection of your own, for your own data or for data that exists.</p>
       </div>
 
       <div class="contrast" data-reveal>
@@ -499,7 +500,7 @@
         <div>
           <span class="tag this">ProjecturEd</span>
           <h3>ProjecturEd</h3>
-          <p>The data is a tree, a table or a graph. Each notation is a projection of it. One piece of data can have several views, and an edit in one shows in the others.</p>
+          <p>The data is a tree, a table or a graph. Each notation is a projection of it. One piece of data can have several views, and an edit in one shows in the others. Every view reads the data through reactive cells, so no view on the screen can show an old value.</p>
         </div>
       </div>
 
@@ -694,24 +695,24 @@
       </div>
       <div class="uses">
         <article class="use" data-reveal>
-          <h3>View and edit structured files as structures</h3>
-          <p>JSON, YAML, XML, Markdown, reStructuredText, SQL, Julia and a math notation open, change and save through their own parsers.</p>
+          <h3>Build an editor for your own data</h3>
+          <p>Define the structure of your data as documents and its views as projections. Navigation, search, copy and paste, filtered and sorted views, files, every backend and the assistant work on it with little or no extra code.</p>
+        </article>
+        <article class="use" data-reveal>
+          <h3>Look into a running Julia program</h3>
+          <p>Any Julia value gets a view with no code: a tree that opens one level at a time. You can design a better view later.</p>
         </article>
         <article class="use" data-reveal>
           <h3>Design a tool window without a GUI toolkit</h3>
           <p>Widgets, tables, cards, tabs and split panes make a complete window. The window of ProjecturEd itself is made this way.</p>
         </article>
         <article class="use" data-reveal>
-          <h3>Look into a running Julia program</h3>
-          <p>A reflection view shows any object as a tree that opens one level at a time.</p>
+          <h3>Edit files as structures</h3>
+          <p>The domains that come with ProjecturEd open, change and save their files through their own parsers, among them JSON, YAML, XML, Markdown, SQL and Julia.</p>
         </article>
         <article class="use" data-reveal>
-          <h3>Show results</h3>
-          <p>Line, bar, histogram, scatter and strip charts, and sequence charts, are documents. You can select a data point like any other part.</p>
-        </article>
-        <article class="use" data-reveal>
-          <h3>Model behaviour and run it</h3>
-          <p>A state machine produces Julia code that runs. A process flowchart runs with breakpoints and a live trace.</p>
+          <h3>Show results and model behaviour</h3>
+          <p>Charts are documents, so you can select a data point like any other part. A state machine produces Julia code that runs, and a process flowchart runs with breakpoints and a live trace.</p>
         </article>
         <article class="use" data-reveal>
           <h3>Ask for a change in plain words</h3>
@@ -752,7 +753,7 @@
           <div class="vs__cell vs__cell--this">
             <span class="tag this">ProjecturEd</span>
             <h3>An assistant that edits data</h3>
-            <p>The model changes the data with the same typed operations as your key presses: insert an element, replace a value, move the selection. The same tests cover both.</p>
+            <p>The model changes the data with the same typed operations as your key presses: insert an element, replace a value, move the selection. The same tests cover both. The window is a document too, so the assistant controls the whole user interface: it can open a tab, split a pane, scroll a view or add a button to the toolbar.</p>
           </div>
         </div>
 
@@ -766,8 +767,20 @@
       <div class="section-head" data-reveal>
         <p class="eyebrow">Capabilities</p>
         <h2>What it does.</h2>
-        <p>The assistant works on the same data as you. The other three multiply: each kind of data goes
-          through each chain of projections to each backend.</p>
+        <p>The assistant works on the same data as you. The other three multiply: each kind of data, yours
+          too, goes through each chain of projections to each backend.</p>
+      </div>
+      <div class="spotlight" data-reveal>
+        <p class="eyebrow eyebrow--plain">Made to be extended</p>
+        <h3>Your data, your views</h3>
+        <p>The domains that come with ProjecturEd are examples, not the limit. A domain of your own is a
+          package: its document types, the projections that make its views, its operations and its key
+          bindings. No other domain depends on it, and it combines with all of them: your document can hold
+          a table or a formula, and theirs can hold yours. The general features work on it with little or no
+          extra code: navigation, search, the clipboard, filtered and sorted views, files, every backend
+          and the assistant, which can find and call your functions.</p>
+        <p><a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/new-domain-guide.md" target="_blank" rel="noopener">Add a domain of your own</a> ·
+          <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/view-your-data-guide.md" target="_blank" rel="noopener">Show your own data</a></p>
       </div>
       <div class="caps caps--large">
         <article class="cap" data-reveal>
@@ -778,7 +791,7 @@
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="4" y="4" width="24" height="24" rx="3"/><circle cx="16" cy="16" r="8"/><path d="M16 11.5 l4 7 h-8 z" fill="currentColor" stroke="none"/></svg></div>
           <h3>One document, many kinds of data</h3>
-          <p>A document of one domain can hold a document of another: a formula in a table cell, JSON inside prose. Navigation and editing cross the boundary, and any part is a document of its own.</p>
+          <p>A document of one domain can hold a document of another, your own domain too: a formula in a table cell, JSON inside prose. Navigation and editing cross the boundary, and any part is a document of its own.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="16" r="2.4" fill="currentColor" stroke="none"/><path d="M9 16 L25 7 M9 16 L25 16 M9 16 L25 25" stroke-linecap="round"/><rect x="24" y="5" width="5" height="4" rx="1" fill="currentColor" stroke="none"/><rect x="24" y="14" width="5" height="4" rx="1" fill="currentColor" stroke="none"/><rect x="24" y="23" width="5" height="4" rx="1" fill="currentColor" stroke="none"/></svg></div>
@@ -801,7 +814,7 @@
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 h6 l3 -9 4 15 3 -8 h8"/></svg></div>
           <h3>Only what you look at is computed</h3>
-          <p>Parts of a document that are not on the screen cost nothing, so a view can show a part of a very large document, or of a list with no end. Each field of the data is a reactive cell, and a change computes again only the parts of the views that depend on it. <a href="#video-lazy">See the video</a>.</p>
+          <p>Parts of a document that are not on the screen cost nothing, so a view can show a part of a very large document, or of a list with no end. Each field of the data is a reactive cell, and a change computes again exactly the parts of the views that depend on it, so every view stays consistent with the data. <a href="#video-lazy">See the video</a>.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="12"/><path d="M13 10.5 l9 5.5 -9 5.5 z" fill="currentColor" stroke="none"/></svg></div>
@@ -822,11 +835,6 @@
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><rect x="8" y="6" width="16" height="22" rx="2"/><rect x="12" y="4" width="8" height="4.5" rx="1.5"/><circle cx="13" cy="18" r="2.3"/><circle cx="19" cy="18" r="2.3"/><path d="M15.3 18 h1.4" stroke-linecap="round"/></svg></div>
           <h3>Paste the same object, or a copy</h3>
           <p>Ctrl+N notes a part without a change of the document. A paste then puts the same object in a second place, so an edit in one place shows in both. Ctrl+Shift+V pastes a copy instead.</p>
-        </article>
-        <article class="cap" data-reveal>
-          <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="9" height="9" rx="1.5"/><rect x="18" y="5" width="9" height="9" rx="1.5"/><rect x="5" y="18" width="9" height="9" rx="1.5"/><rect x="18" y="18" width="9" height="9" rx="1.5" stroke-dasharray="2 2.4"/><path d="M22.5 20.6 v4 M20.5 22.6 h4"/></svg></div>
-          <h3>Your own domain</h3>
-          <p>A domain is a package of its own: document types, projections, operations and key bindings. No other domain depends on it, and the general features work on it: navigation, search, the clipboard, filtering, files, every backend and the assistant.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="22" height="22" rx="5"/><path d="M9.5 10 l2.5 2 -2.5 2"/><path d="M14.5 12 h7.5"/><path d="M9.5 18 h13"/><path d="M9.5 22.5 h9" stroke-dasharray="2 2.4"/></svg></div>
@@ -1095,7 +1103,10 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
         <h2>Examples, with the code that makes them.</h2>
         <p>From here on, the page is for a developer. Each example is a document or a projection drawn by
           the editor, and the Julia code beside it is what makes it. The catalog below lists the domains and
-          the projections that you can combine.</p>
+          the projections that you can combine. The guides
+          <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/new-domain-guide.md" target="_blank" rel="noopener">Adding a new domain</a> and
+          <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/view-your-data-guide.md" target="_blank" rel="noopener">A view of your own data</a>
+          show how to add your own.</p>
       </div>
       <div class="examples-grid">
 
@@ -1251,7 +1262,7 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
       <div class="section-head" data-reveal>
         <p class="eyebrow">Catalog</p>
         <h2>Domains and projections.</h2>
-        <p>A document belongs to a domain, and a projection turns it into a notation. Both sets are open, and projections compose.</p>
+        <p>A document belongs to a domain, and a projection turns it into a notation. These come with ProjecturEd, and they are a start, not a limit: a domain of your own joins them as a package, and the general projections below work on it too.</p>
       </div>
 
       <h3 class="cat-label" data-reveal>Domains</h3>
@@ -1279,6 +1290,7 @@ JuliaFunction(JuliaIdentifier("report"), [JuliaIdentifier("rows")],
         <span class="chip"><span class="dot"></span>Version history and undo</span>
         <span class="chip"><span class="dot"></span>AI conversation</span>
         <span class="chip"><span class="dot"></span>Panes, tabs and tools</span>
+        <span class="chip chip--soft"><span class="dot"></span>your own · as a package</span>
         <span class="chip chip--soft"><span class="dot"></span>any object · reflected</span>
         <span class="chip chip--soft"><span class="dot"></span>… and combinations of them</span>
       </div>
