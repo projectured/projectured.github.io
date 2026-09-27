@@ -705,6 +705,30 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
         </article>
 
         <article class="video-item" data-reveal>
+          <h3>The window is a document too</h3>
+          <p>In the evaluator, <code>editor</code> is the window of the program. The forms walk down its
+            fields: the screen holds the windows, a window holds a shell, and the shell holds the menu bar,
+            the toolbar and the status bar. The toolbar that a form returns draws as itself in its result
+            row. It is the same object as the toolbar of the window. A press on the copy opens the gesture
+            log, and the log lists that press as its newest gesture. A form that adds a button changes the
+            toolbar and its copy at once.</p>
+          <p>A search of the window finds the file explorer, and a double-click in its copy opens a JSON
+            file in a new tab. A drag puts the tab beside the evaluator, and a second search finds the
+            document of the tab. An edit in the tab shows in the result row, an edit in the result row
+            shows in the tab, and <code>Ctrl+Z</code> takes both back: the two views show one
+            document.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/reflective-editor-poster.jpg">
+              <source src="assets/videos/reflective-editor.mp4" type="video/mp4">
+            </video>
+            <figcaption>10 forms, a double-click, a drag and two edits in 137 seconds</figcaption>
+          </figure>
+          <p>A form that ends with <code>;</code> hides its value, as in the Julia REPL, so the form
+            that adds the button shows no result.</p>
+        </article>
+
+        <article class="video-item" data-reveal>
           <h3>Only what changes is painted again</h3>
           <p>The window paints again only the parts of the screen that changed, and a red outline shows
             them. When the pointer moves over the toolbar or over the navigator, only the button or the
