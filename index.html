@@ -751,6 +751,27 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
         </article>
 
         <article class="video-item" data-reveal>
+          <h3>Only what you look at is computed</h3>
+          <p>A list can have no end. One form in the evaluator defines all the primes, with the classic
+            lazy sieve of Eratosthenes, and a pane shows the list. The label above the list counts the
+            links of the list that exist: the rows that the pane has shown, and one more at each edge.
+            When the wheel scrolls down, the count grows. When it scrolls back, the count stays the same,
+            because each link is computed once.</p>
+          <p>A filter of the list, the primes that end in 7, is a lazy list too. While it scrolls, the
+            count of the primes grows with it, because the filter asks the sieve for a prime only when it
+            needs one. The primes around one trillion start in the middle. Each one is found by a test of
+            that number alone, so the list reaches up and down from one trillion, and it computes only the
+            rows on the screen.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/lazy-primes-poster.jpg">
+              <source src="assets/videos/lazy-primes.mp4" type="video/mp4">
+            </video>
+            <figcaption>7 forms and the wheel over three lists that have no end, in 92 seconds</figcaption>
+          </figure>
+        </article>
+
+        <article class="video-item" data-reveal>
           <h3>Only what changes is painted again</h3>
           <p>The window paints again only the parts of the screen that changed, and a red outline shows
             them. When the pointer moves over the toolbar or over the navigator, only the button or the
