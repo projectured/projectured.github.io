@@ -1,0 +1,42 @@
+<!doctype html>
+<!--
+  The social card of the site, assets/og.png, 1200 × 630.
+  Render it again after a change of the title:
+    google-chrome --headless=new --hide-scrollbars --window-size=1200,630 \
+      --screenshot=assets/og.png "file://$PWD/assets/og/og.html"
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ProjecturEd social card</title>
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    background: #0e1116; color: #e6e9ee;
+    font-family: "DejaVu Sans Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    position: relative;
+  }
+  .mark { position: absolute; top: 64px; right: 70px; width: 132px; height: 104px; }
+  .eyebrow { position: absolute; left: 80px; top: 146px; font-size: 21px; letter-spacing: .18em; text-transform: uppercase; color: #8a919c; }
+  .brand { position: absolute; left: 76px; top: 196px; font-size: 104px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  .brand b { color: #5b7bff; }
+  .rule { position: absolute; left: 80px; top: 360px; width: 120px; height: 6px; background: #5b7bff; }
+  .title { position: absolute; left: 80px; top: 394px; font-size: 33px; line-height: 1.5; color: #a6adba; }
+  .url { position: absolute; left: 80px; top: 540px; font-size: 25px; color: #5b7bff; }
+</style>
+</head>
+<body>
+  <svg class="mark" viewBox="0 0 132 104" aria-hidden="true">
+    <circle cx="16" cy="52" r="8" fill="#5b7bff"/>
+    <g stroke="#5b7bff" stroke-width="5" stroke-linecap="round" fill="none">
+      <path d="M22 52 L104 14"/><path d="M22 52 L104 52"/><path d="M22 52 L104 90"/>
+    </g>
+    <g fill="#e6e9ee"><rect x="104" y="4" width="22" height="18" rx="3"/><rect x="104" y="43" width="22" height="18" rx="3"/><rect x="104" y="82" width="22" height="18" rx="3"/></g>
+  </svg>
+  <div class="eyebrow">A projectional editor, written in Julia</div>
+  <div class="brand">Projectur<b>Ed</b></div>
+  <div class="rule"></div>
+  <div class="title">One structure, many editable views —<br>with an AI assistant.</div>
+  <div class="url">projectured.org</div>
+</body>
+</html>

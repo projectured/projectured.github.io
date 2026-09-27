@@ -3,22 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ProjecturEd — view, edit and transform structured data, with an AI assistant</title>
+<title>ProjecturEd — one structure, many editable views, with an AI assistant</title>
 <meta name="description" content="ProjecturEd is a projectional editor written in Julia: an application to view and edit structured data with an AI assistant, and a generic user interface for any Julia program.">
 <meta name="theme-color" content="#f0f1f3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
-<meta property="og:title" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
+<meta property="og:title" content="ProjecturEd — one structure, many editable views, with an AI assistant">
 <meta property="og:description" content="A projectional editor written in Julia: an application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
-<meta property="og:url" content="https://projectured.github.io">
-<meta property="og:image" content="https://projectured.github.io/assets/og.png">
+<meta property="og:url" content="https://projectured.org/">
+<meta property="og:image" content="https://projectured.org/assets/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
+<meta property="og:image:alt" content="ProjecturEd — one structure, many editable views, with an AI assistant">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ProjecturEd — view, edit and transform structured data, with an AI assistant">
+<meta name="twitter:title" content="ProjecturEd — one structure, many editable views, with an AI assistant">
 <meta name="twitter:description" content="A projectional editor written in Julia: an application to view and edit structured data with an AI assistant, and a generic user interface for Julia programs.">
-<meta name="twitter:image" content="https://projectured.github.io/assets/og.png">
+<meta name="twitter:image" content="https://projectured.org/assets/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230e1116'/%3E%3Ccircle cx='9' cy='16' r='2.4' fill='%235b7bff'/%3E%3Cg stroke='%235b7bff' stroke-width='1.6' fill='none'%3E%3Cpath d='M11 16 L23 8'/%3E%3Cpath d='M11 16 L23 16'/%3E%3Cpath d='M11 16 L23 24'/%3E%3C/g%3E%3Cg fill='%23e6e9ee'%3E%3Crect x='22' y='6' width='5' height='4' rx='1'/%3E%3Crect x='22' y='14' width='5' height='4' rx='1'/%3E%3Crect x='22' y='22' width='5' height='4' rx='1'/%3E%3C/g%3E%3C/svg%3E">
 <style>
   :root {
@@ -150,7 +150,8 @@
 
   /* ---------- hero ---------- */
   .hero { padding-block: clamp(2.6rem, 7vw, 5.4rem) clamp(2rem, 5vw, 3.4rem); }
-  .hero__copy { max-width: 52ch; }
+  .hero__copy { max-width: 60rem; }
+  .hero .eyebrow { flex-wrap: wrap; row-gap: .3rem; }
   .hero__shot { margin-top: clamp(2.2rem, 5vw, 3.6rem); }
   .hero__shot img {
     width: 100%; height: auto; display: block;
@@ -433,13 +434,12 @@
     <div class="wrap">
       <div class="hero__copy">
         <p class="eyebrow">written in Julia · <a class="eyebrow__link" href="#status">under development</a></p>
-        <h1>View, edit and transform<br><span class="dim">structured data</span> —<br>with an <span class="hl">AI assistant</span>.</h1>
+        <h1>One structure,<br><span class="dim">many editable views</span> —<br>with an <span class="hl">AI assistant</span>.</h1>
         <p class="hero__lede">
-          ProjecturEd works with about twenty kinds of data, among them JSON, XML, Markdown, SQL,
-          Julia code, math, charts and state machines. It shows them in one window, and most views
-          take your edits: a change in a view changes the data, not a text copy of it. It is written
-          in Julia, so it is also a generic user interface for your own programs, and the AI
-          assistant inside it works on the same data, with the same edits, as you.
+          ProjecturEd is an application to view and edit structured data: JSON, XML, Markdown, SQL,
+          Julia code, math, charts and more. Most views take your edits, and an edit in a view changes
+          the data, not a text copy of it. An AI assistant edits the same data with the same operations
+          as you. It is written in Julia, so it is also a generic user interface for your own programs.
         </p>
         <div class="cta-row">
           <a class="btn btn--primary" href="#try">Try it →</a>
