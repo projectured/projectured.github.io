@@ -292,9 +292,20 @@
   /* the last card fills the rest of its row, so no empty cell shows */
   @media (min-width: 620px) and (max-width: 939px) { .caps > .cap:last-child:nth-child(odd) { grid-column: span 2; } }
   @media (min-width: 940px) {
-    .caps > .cap:last-child:nth-child(3n+2) { grid-column: span 2; }
-    .caps > .cap:last-child:nth-child(3n+1) { grid-column: span 3; }
+    .caps:not(.caps--large) > .cap:last-child:nth-child(3n+2) { grid-column: span 2; }
+    .caps:not(.caps--large) > .cap:last-child:nth-child(3n+1) { grid-column: span 3; }
   }
+  .cap p a { color: var(--ink); }
+  /* the four capabilities that carry the idea, then the others at a smaller size */
+  @media (min-width: 940px) { .caps--large { grid-template-columns: 1fr 1fr; } }
+  .caps--large .cap { padding: clamp(1.7rem, 3vw, 2.3rem) clamp(1.3rem, 3vw, 2.2rem); gap: .85rem; }
+  .caps--large .cap__icon { width: 38px; height: 38px; }
+  .caps--large .cap h3 { font-size: var(--step-1); }
+  .caps--small .cap { padding: 1.3rem clamp(1.1rem, 2vw, 1.4rem); gap: .55rem; }
+  .caps--small .cap__icon { width: 24px; height: 24px; }
+  .caps--small .cap h3 { font-size: .95rem; }
+  .caps--small .cap p { font-size: var(--step--1); line-height: 1.55; }
+  .cat-label + .caps { margin-top: 0; }
 
   /* spotlight callout */
   .spotlight {
@@ -541,8 +552,10 @@
       <div class="section-head" data-reveal>
         <p class="eyebrow">Capabilities</p>
         <h2>What it does.</h2>
+        <p>The assistant works on the same data as you. The other three multiply: each kind of data goes
+          through each chain of projections to each backend.</p>
       </div>
-      <div class="caps">
+      <div class="caps caps--large">
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="22" height="22" rx="5"/><circle cx="16" cy="16" r="2.6" fill="currentColor" stroke="none"/><circle cx="16" cy="16" r="7.5" stroke-dasharray="2 3"/><path d="M16 5 v3 M16 24 v3 M5 16 h3 M24 16 h3" stroke-linecap="round"/></svg></div>
           <h3>An assistant on the same data</h3>
@@ -563,6 +576,9 @@
           <h3>A window, a terminal or a browser</h3>
           <p>The same views run in a native window, in a terminal and in a browser, and with no screen for tests. A view also goes to a vector PDF, a PNG or an MP4. It runs from source, or as a built binary that needs no Julia.</p>
         </article>
+      </div>
+      <h3 class="cat-label" data-reveal>More capabilities</h3>
+      <div class="caps caps--small">
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7 h6 M8 7 v18 M8 16 h6 M8 25 h6 M20 7 h4 M20 16 h4 M20 25 h4"/></svg></div>
           <h3>An edit keeps the data well formed</h3>
@@ -570,8 +586,8 @@
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18 h6 l3 -9 4 15 3 -8 h8"/></svg></div>
-          <h3>Incremental &amp; reactive</h3>
-          <p>Each field of the data is a reactive cell. After a change, only the dependent parts of the views are computed again, and only the parts on the screen. A value is static, mutable or reactive, field by field.</p>
+          <h3>Only what you look at is computed</h3>
+          <p>Parts of a document that are not on the screen cost nothing, so a view can show a part of a very large document, or of a list with no end. Each field of the data is a reactive cell, and a change computes again only the parts of the views that depend on it. <a href="#video-lazy">See the video</a>.</p>
         </article>
         <article class="cap" data-reveal>
           <div class="cap__icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="16" r="12"/><path d="M13 10.5 l9 5.5 -9 5.5 z" fill="currentColor" stroke="none"/></svg></div>
@@ -775,7 +791,7 @@ julia&gt; run_example(JsonNothing(selection = @reference), ChainingProjection(
             that adds the button shows no result.</p>
         </article>
 
-        <article class="video-item" data-reveal>
+        <article class="video-item" id="video-lazy" data-reveal>
           <h3>Only what you look at is computed</h3>
           <p>A list can have no end. One form in the evaluator defines all the primes, with the classic
             lazy sieve of Eratosthenes, and a pane shows the list. The label above the list counts the
