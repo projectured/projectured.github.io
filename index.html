@@ -153,7 +153,7 @@
   .hero__copy { max-width: 60rem; }
   .hero .eyebrow { flex-wrap: wrap; row-gap: .3rem; }
   .hero__shot { margin-top: clamp(2.2rem, 5vw, 3.6rem); }
-  .hero__shot img {
+  .hero__shot img, .hero__shot video {
     width: 100%; height: auto; display: block;
     border: 1px solid var(--line); border-radius: 12px; background: var(--paper-2);
   }
@@ -451,9 +451,12 @@
       </div>
 
       <figure class="hero__shot" data-reveal>
-        <img src="assets/assistant.jpg" width="1600" height="1000" loading="eager" decoding="async"
-             alt="A conversation with the AI assistant inside ProjecturEd: the model reads a guide, searches the API, runs Julia code and shows each result, and the user runs code in the same conversation.">
-        <figcaption>a conversation with the assistant — it reads a guide, searches the API, runs Julia and shows each result</figcaption>
+        <video controls muted playsinline preload="metadata" width="1920" height="1080"
+               poster="assets/videos/queue-study-poster.jpg"
+               aria-label="The AI assistant of ProjecturEd, a local model, builds a study of an M/M/1/K queue from seven requests: it writes the network and the configuration, the closed form as formulas, runs a sweep of the buffer capacity in OMNeT++, plots the queue length and the drops, checks the simulation against the formula, and finds that a capacity of 13 keeps the blocking under 1 %.">
+          <source src="assets/videos/queue-study.mp4" type="video/mp4">
+        </video>
+        <figcaption>seven requests to a local model — a queue study, sixteen OMNeT++ runs, two charts, and the answer: a buffer of 13</figcaption>
       </figure>
     </div>
   </section>
