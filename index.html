@@ -955,6 +955,35 @@
       </div>
       <div class="videos">
 
+        <article class="video-item" id="video-data-frame" data-reveal>
+          <h3>A data frame as a table that you edit</h3>
+          <p>A <code>DataFrame</code> of DataFrames.jl opens as a table above the evaluator. The table is a
+            view of the frame, not a copy, and it reads only the rows on the screen. Each header shows the
+            name and the type of its column, each row shows its number in the frame, and the corner shows
+            how many rows the table keeps.</p>
+          <p>A filter under a header is a condition on its column, such as <code>&gt; 50</code>. The bar
+            "Rows where" takes a condition in Julia over the columns, such as
+            <code>in_stock &amp;&amp; quantity &lt; 10</code>. A click on a sort arrow sorts the rows, and
+            <code>Ctrl+F</code> and <code>F3</code> jump to each row that holds a name.</p>
+          <p>A click on a price opens the cell, and the new price goes into the frame itself, so
+            <code>df[457, :price]</code> in the evaluator reads it at once. <code>Ctrl+Z</code> takes the
+            edit back and opens the cell again with the text of the edit, so that the next
+            <code>Ctrl+Z</code> takes back the keys, and <code>Ctrl+Y</code> does the edit again. Last, a
+            frame of ten million rows opens at once, and a drag of its scroll bar goes to the last row. The
+            panel at the bottom right shows each gesture, and what it did.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/data-frame-poster.jpg">
+              <source src="assets/videos/data-frame.mp4" type="video/mp4">
+            </video>
+            <figcaption>5 forms, 9 clicks, the wheel and a drag of the scroll bar, in 103 seconds</figcaption>
+          </figure>
+          <p>To open a data frame from the Julia REPL, load <code>SimpleDirectMediaLayer</code> too, because
+            it draws the window. Then give the frame to <code>display_in_editor</code>:</p>
+          <pre class="ex__code"><code class="language-julia"><span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">Projectured</span>, <span class="j-type">DataFrames</span>, <span class="j-type">SimpleDirectMediaLayer</span>
+<span class="j-prompt">julia&gt; </span><span class="j-function">display_in_editor</span>(<span class="j-type">DataFrame</span>(n = <span class="j-number">1</span>:<span class="j-number">100_000</span>, square = (<span class="j-number">1</span>:<span class="j-number">100_000</span>) .^ <span class="j-number">2</span>))</code></pre>
+        </article>
+
         <article class="video-item" data-reveal>
           <h3>The assistant edits a file</h3>
           <p>A person asks the assistant to add Frank, 30, from Paris to <code>people.json</code>. The
@@ -1132,34 +1161,6 @@
             </video>
             <figcaption>4 clicks, 12 steps of the wheel and 3 undos, in 27 seconds</figcaption>
           </figure>
-        </article>
-
-        <article class="video-item" id="video-data-frame" data-reveal>
-          <h3>A data frame as a table that you edit</h3>
-          <p>A <code>DataFrame</code> of DataFrames.jl opens as a table above the evaluator. The table is a
-            view of the frame, not a copy, and it reads only the rows on the screen. Each header shows the
-            name and the type of its column, each row shows its number in the frame, and the corner shows
-            how many rows the table keeps.</p>
-          <p>A filter under a header is a condition on its column, such as <code>&gt; 50</code>. The bar
-            "Rows where" takes a condition in Julia over the columns, such as
-            <code>in_stock &amp;&amp; quantity &lt; 10</code>. A click on a sort arrow sorts the rows, and
-            <code>Ctrl+F</code> and <code>F3</code> jump to each row that holds a name.</p>
-          <p>A click on a price opens the cell, and the new price goes into the frame itself, so
-            <code>df[457, :price]</code> in the evaluator reads it at once. <code>Ctrl+Z</code> takes the
-            edit back and opens the cell again with the text of the edit, so that the next
-            <code>Ctrl+Z</code> takes back the keys, and <code>Ctrl+Y</code> does the edit again. Last, a
-            frame of ten million rows opens at once, and a drag of its scroll bar goes to the last row. The
-            panel at the bottom right shows each gesture, and what it did.</p>
-          <figure class="showcase">
-            <video controls muted playsinline preload="metadata" width="1280" height="720"
-                   poster="assets/videos/data-frame-poster.jpg">
-              <source src="assets/videos/data-frame.mp4" type="video/mp4">
-            </video>
-            <figcaption>5 forms, 9 clicks, the wheel and a drag of the scroll bar, in 103 seconds</figcaption>
-          </figure>
-          <p>To open a data frame from the Julia REPL, give it to <code>display_in_editor</code>:</p>
-          <pre class="ex__code"><code class="language-julia"><span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">Projectured</span>, <span class="j-type">DataFrames</span>
-<span class="j-prompt">julia&gt; </span><span class="j-function">display_in_editor</span>(<span class="j-type">DataFrame</span>(n = <span class="j-number">1</span>:<span class="j-number">100_000</span>, square = (<span class="j-number">1</span>:<span class="j-number">100_000</span>) .^ <span class="j-number">2</span>))</code></pre>
         </article>
 
       </div>
