@@ -1116,6 +1116,24 @@
           <pre class="ex__code"><code>$ PROJECTURED_PARTIAL_RENDER=1 PROJECTURED_DEBUG_DIRTY=1 bin/projectured notes.md</code></pre>
         </article>
 
+        <article class="video-item" data-reveal>
+          <h3>A setting takes effect at once</h3>
+          <p>The Settings button opens the settings of the running editor. Each group is a card with a
+            summary, and each setting has a line under it that says what it sets. The page is made from
+            the declarations of the settings, so a new setting needs no code of its own to show here.</p>
+          <p>Two switches of the Render card turn on the partial repaint and its red outline, and the
+            window follows at once: each button that the pointer rests on is outlined when it is painted
+            again. <code>Ctrl+Z</code> takes the settings back, one step at a time, as it takes back an
+            edit. The panel at the bottom right shows each click and each key, and what it did.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1280" height="720"
+                   poster="assets/videos/settings-poster.jpg">
+              <source src="assets/videos/settings.mp4" type="video/mp4">
+            </video>
+            <figcaption>4 clicks, 12 steps of the wheel and 3 undos, in 27 seconds</figcaption>
+          </figure>
+        </article>
+
       </div>
     </div>
   </section>
