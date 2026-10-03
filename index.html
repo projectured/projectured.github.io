@@ -1226,7 +1226,7 @@ julia&gt; display_in_editor(DataFrame(n = 1:1000, square = (1:1000) .^ 2))</code
           lists the packages, and says how to load each one by name instead. The first window of a session takes a
           while, because Julia compiles the code of the editor; later windows open fast.</p>
         <h3 class="try__title">The application from the source</h3>
-        <pre class="ex__code"><code>git clone https://github.com/projectured/AutoIntegrations.jl auto-integrations
+        <pre class="ex__code"><code>git clone https://github.com/projectured/AutoIntegration.jl auto-integration
 git clone https://github.com/projectured/projectured-julia
 cd projectured-julia
 bin/projectured</code></pre>
@@ -1261,9 +1261,9 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
             <tr><td><a href="https://github.com/projectured/ProjecturedRegistry" target="_blank" rel="noopener">ProjecturedRegistry</a></td>
               <td>The Julia registry that names each version of the released packages.</td>
               <td>Pkg, after you add the registry once.</td></tr>
-            <tr><td><a href="https://github.com/projectured/AutoIntegrations.jl" target="_blank" rel="noopener">AutoIntegrations.jl</a></td>
+            <tr><td><a href="https://github.com/projectured/AutoIntegration.jl" target="_blank" rel="noopener">AutoIntegration.jl</a></td>
               <td>The package that loads an installed package when its triggers are loaded. <code>Projectured</code> depends on it.</td>
-              <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>auto-integrations</code>.</td></tr>
+              <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>auto-integration</code>.</td></tr>
           </table>
         </div>
       </div>
