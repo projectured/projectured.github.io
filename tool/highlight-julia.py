@@ -27,7 +27,7 @@ TOKEN = re.compile(r"""
     (?P<comment>\#=.*?=\#|\#[^\n]*)
   | (?P<string>[A-Za-z_]*"(?:\\.|[^"\\\n])*")
   | (?P<macro>@[A-Za-z_][A-Za-z0-9_!]*)
-  | (?P<number>\b0x[0-9a-fA-F]+\b|\b\d+(?:\.\d+)?(?:[eE][+-]?\d+)?\b)
+  | (?P<number>\b0x[0-9a-fA-F]+\b|\b\d+(?:_\d+)*(?:\.\d+)?(?:[eE][+-]?\d+)?\b)
   | (?P<typed>::)
   | (?P<symbol>(?<![A-Za-z0-9_:)\]])(?<!\?\ ):[A-Za-z_][A-Za-z0-9_!]*)
   | (?P<name>[A-Za-z_][A-Za-z0-9_!]*)
