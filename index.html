@@ -310,6 +310,20 @@
   .try p { margin: 0; color: var(--ink-soft); line-height: 1.55; }
   .try p code { font-family: var(--mono); font-size: .92em; color: var(--ink); }
   .try .ex__code { margin: 0; }
+  .try__title { font-size: 1rem; margin: .8rem 0 0; letter-spacing: 0; }
+  .repos-wrap { overflow-x: auto; }
+  .repos { width: 100%; border-collapse: collapse; font-size: var(--step-0); }
+  .repos th, .repos td { text-align: left; vertical-align: top; padding: .55rem .7rem .55rem 0;
+    border-top: 1px solid var(--line-soft); color: var(--ink-soft); line-height: 1.45; }
+  .repos th { color: var(--ink); font-weight: 600; border-top: 0; }
+  .repos td:first-child { white-space: nowrap; }
+  @media (max-width: 600px) {
+    .repos, .repos tbody, .repos tr, .repos td { display: block; }
+    .repos tr:first-child { display: none; }
+    .repos tr { border-top: 1px solid var(--line-soft); padding: .6rem 0; }
+    .repos td { border-top: 0; padding: .1rem 0; }
+    .repos td:last-child { color: var(--ink-faint); }
+  }
 
   /* the loops of "The idea": the wide layout, or the tall one on a narrow screen */
   .loops { margin: 2.8rem 0 0; }
@@ -1020,19 +1034,19 @@
             </video>
             <figcaption>115 keys in 32 seconds, from an empty document</figcaption>
           </figure>
-          <p>To open the same editor from a Julia session with the ProjecturEd packages:</p>
-          <pre class="ex__code"><code class="language-julia"><span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">Projectured</span>, <span class="j-type">ProjecturedExample</span>, <span class="j-type">ProjecturedSdl</span>
+          <p>To open the same editor from a Julia session in a clone of the source:</p>
+          <pre class="ex__code"><code class="language-julia"><span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">ProjecturedAll</span>, <span class="j-type">ProjecturedExample</span>, <span class="j-type">ProjecturedSDL</span>
 
 <span class="j-comment"># an empty JSON document, drawn as JSON → syntax → text → graphics</span>
 <span class="j-prompt">julia&gt; </span><span class="j-function">run_example</span>(<span class="j-type">JsonNothing</span>(selection = <span class="j-macro">@reference</span>), <span class="j-type">ChainingProjection</span>(
            <span class="j-type">RecursiveProjection</span>(<span class="j-type">JsonToSyntax</span>()),
            <span class="j-type">RecursiveProjection</span>(<span class="j-type">SyntaxToText</span>()),
-           <span class="j-type">TextToGraphics</span>(measure = measure_sdl_text)))</code></pre>
+           <span class="j-type">TextToGraphics</span>(measure = <span class="j-type">FontFileMeasure</span>())))</code></pre>
           <p>The window opens with the empty document selected. Press <code>{</code> to start.</p>
           <p>The whole JSON domain is two short files:
-            <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonDocument.jl" target="_blank" rel="noopener"><code>JsonDocument.jl</code></a>
+            <a href="https://github.com/projectured/projectured-julia/blob/main/source/domain/json/JsonDocument.jl" target="_blank" rel="noopener"><code>JsonDocument.jl</code></a>
             says what a JSON document is and what each key does to it, and
-            <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonToSyntax.jl" target="_blank" rel="noopener"><code>JsonToSyntax.jl</code></a>
+            <a href="https://github.com/projectured/projectured-julia/blob/main/source/domain/json/JsonToSyntax.jl" target="_blank" rel="noopener"><code>JsonToSyntax.jl</code></a>
             says how it looks. They hold about 120 and 140 lines.</p>
         </article>
 
@@ -1172,12 +1186,28 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Try it</p>
-        <h2>Clone it, and run it.</h2>
-        <p>You need Julia 1.11 or later. A native window also needs SDL2 and SDL_ttf. The packages are not in
-          the General registry, so clone the repository.</p>
+        <h2>Add the packages, or run the application.</h2>
+        <p>You need Julia 1.12 or later. A native window also needs SDL2 and SDL_ttf. There are two ways to
+          start: add the packages to a project of your own, or clone the source and run the application.</p>
       </div>
       <div class="try" data-reveal>
-        <pre class="ex__code"><code>git clone https://github.com/projectured/projectured-julia
+        <h3 class="try__title">The packages in your own project</h3>
+        <p>The packages are in the registry <code>ProjecturedRegistry</code>, not in the General registry. Add it
+          once, with General, then add the packages that your program uses by name.</p>
+        <pre class="ex__code"><code>pkg&gt; registry add General
+pkg&gt; registry add https://github.com/projectured/ProjecturedRegistry
+pkg&gt; add Projectured ProjecturedSDL ProjecturedDataFrames DataFrames SimpleDirectMediaLayer
+
+julia&gt; using Projectured, DataFrames, SimpleDirectMediaLayer
+julia&gt; display_in_editor(DataFrame(n = 1:1000, square = (1:1000) .^ 2))</code></pre>
+        <p><code>using Projectured</code> loads the packages of the window and of the data frame by itself, because
+          the packages that they join are loaded. The
+          <a href="https://github.com/projectured/Projectured.jl" target="_blank" rel="noopener">front page of Projectured.jl</a>
+          lists the packages, and says how to load each one by name instead. The first window of a session takes a
+          while, because Julia compiles the code of the editor; later windows open fast.</p>
+        <h3 class="try__title">The application from the source</h3>
+        <pre class="ex__code"><code>git clone https://github.com/projectured/AutoIntegrations.jl auto-integrations
+git clone https://github.com/projectured/projectured-julia
 cd projectured-julia
 bin/projectured</code></pre>
         <p>The window opens with a file navigator on the left, the open files in tabs in the middle, and the
@@ -1192,12 +1222,30 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
           <code>bin/build_projectured</code> compiles the application into a binary that runs without Julia.
           The <a href="https://github.com/projectured/projectured-julia#quick-start" target="_blank" rel="noopener">quick start of the README</a>
           has the details.</p>
-        <p>You can also start from the Julia REPL. There are more than a hundred examples, and
+        <p>From a clone, you can also start from the Julia REPL. There are more than a hundred examples, and
           <code>run_example</code> opens one in a window. The
           <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/examples-tour.md" target="_blank" rel="noopener">examples tour</a> lists them.</p>
         <pre class="ex__code"><code class="language-julia"><span class="j-prompt">$ </span>julia --project=environment/all
-<span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">Projectured</span>, <span class="j-type">ProjecturedExample</span>, <span class="j-type">ProjecturedSdl</span>
+<span class="j-prompt">julia&gt; </span><span class="j-keyword">using</span> <span class="j-type">Projectured</span>, <span class="j-type">ProjecturedExample</span>, <span class="j-type">ProjecturedSDL</span>
 <span class="j-prompt">julia&gt; </span><span class="j-function">run_example</span>(<span class="j-string">"json"</span>)        <span class="j-comment"># one example in a window</span></code></pre>
+        <h3 class="try__title">Which repository is which</h3>
+        <div class="repos-wrap">
+          <table class="repos">
+            <tr><th>Repository</th><th>What it is</th><th>Who uses it</th></tr>
+            <tr><td><a href="https://github.com/projectured/projectured-julia" target="_blank" rel="noopener">projectured-julia</a></td>
+              <td>The source: the application, the examples, the tests and the guides.</td>
+              <td>A person who runs the application from the source, or changes ProjecturEd.</td></tr>
+            <tr><td><a href="https://github.com/projectured/Projectured.jl" target="_blank" rel="noopener">Projectured.jl</a></td>
+              <td>The released packages, one folder for each, written from projectured-julia by the release.</td>
+              <td>Pkg, when you add a package. A change belongs to projectured-julia.</td></tr>
+            <tr><td><a href="https://github.com/projectured/ProjecturedRegistry" target="_blank" rel="noopener">ProjecturedRegistry</a></td>
+              <td>The Julia registry that names each version of the released packages.</td>
+              <td>Pkg, after you add the registry once.</td></tr>
+            <tr><td><a href="https://github.com/projectured/AutoIntegrations.jl" target="_blank" rel="noopener">AutoIntegrations.jl</a></td>
+              <td>The package that loads an installed package when its triggers are loaded. <code>Projectured</code> depends on it.</td>
+              <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>auto-integrations</code>.</td></tr>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -1219,8 +1267,8 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
         <h3 class="walk__title">A domain in four parts</h3>
         <p class="walk__intro">This is the JSON domain of ProjecturEd, cut down to its parts, and a domain of your
           own has the same four. The whole domain is two files,
-          <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonDocument.jl" target="_blank" rel="noopener"><code>JsonDocument.jl</code></a> and
-          <a href="https://github.com/projectured/projectured-julia/blob/main/source/json/JsonToSyntax.jl" target="_blank" rel="noopener"><code>JsonToSyntax.jl</code></a>, and the
+          <a href="https://github.com/projectured/projectured-julia/blob/main/source/domain/json/JsonDocument.jl" target="_blank" rel="noopener"><code>JsonDocument.jl</code></a> and
+          <a href="https://github.com/projectured/projectured-julia/blob/main/source/domain/json/JsonToSyntax.jl" target="_blank" rel="noopener"><code>JsonToSyntax.jl</code></a>, and the
           <a href="https://github.com/projectured/projectured-julia/blob/main/documentation/guide/new-domain-guide.md" target="_blank" rel="noopener">guide for a new domain</a>
           builds one from the start.</p>
         <div class="walk__steps">
@@ -1535,6 +1583,10 @@ v_xml   = <span class="j-type">GraphVertex</span>(xml)     <span class="j-commen
             <span>Source<small>Julia · on GitHub</small></span>
             <span>↗</span>
           </a>
+          <a class="status__link" href="https://github.com/projectured/Projectured.jl" target="_blank" rel="noopener">
+            <span>Packages<small>Projectured.jl · ProjecturedRegistry</small></span>
+            <span>↗</span>
+          </a>
           <a class="status__link" href="https://github.com/projectured/projectured-julia/issues" target="_blank" rel="noopener">
             <span>Report a problem<small>GitHub issues</small></span>
             <span>↗</span>
@@ -1566,6 +1618,7 @@ v_xml   = <span class="j-type">GraphVertex</span>(xml)     <span class="j-commen
       <div class="tb tb--live"><div class="k">Status</div><div class="v"><span class="live-dot"></span>In active development</div></div>
       <div class="tb"><div class="k">Contact</div><div class="v"><a href="mailto:projectured@gmail.com">projectured@gmail.com</a></div></div>
       <div class="tb"><div class="k">Source</div><div class="v"><a href="https://github.com/projectured/projectured-julia" target="_blank" rel="noopener">projectured&#8203;/projectured-julia</a></div></div>
+      <div class="tb"><div class="k">Packages</div><div class="v"><a href="https://github.com/projectured/Projectured.jl" target="_blank" rel="noopener">projectured&#8203;/Projectured.jl</a></div></div>
       <div class="tb"><div class="k">Original</div><div class="v"><a href="https://github.com/projectured/projectured-lisp" target="_blank" rel="noopener">projectured&#8203;/projectured-lisp</a></div></div>
       <div class="tb"><div class="k">Sheet</div><div class="v">01 · landing</div></div>
     </div>
