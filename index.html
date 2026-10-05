@@ -1212,8 +1212,10 @@
       </div>
       <div class="try" data-reveal>
         <h3 class="try__title">The packages in your own project</h3>
-        <p>The packages are in the registry <code>ProjecturedRegistry</code>, not in the General registry. Add it
-          once, with General, then add the packages that your program uses by name.</p>
+        <p>The packages are in the registry
+          <a href="https://github.com/projectured/ProjecturedRegistry" target="_blank" rel="noopener"><code>ProjecturedRegistry</code></a>,
+          not in the <a href="https://github.com/JuliaRegistries/General" target="_blank" rel="noopener">General</a>
+          registry. Add it once, with General, then add the packages that your program uses by name.</p>
         <pre class="ex__code"><code>pkg&gt; registry add General
 pkg&gt; registry add https://github.com/projectured/ProjecturedRegistry
 pkg&gt; add Projectured ProjecturedSDL ProjecturedDataFrames DataFrames SimpleDirectMediaLayer
@@ -1224,7 +1226,9 @@ julia&gt; display_in_editor(DataFrame(n = 1:1000, square = (1:1000) .^ 2))</code
           the packages that they join are loaded. The
           <a href="https://github.com/projectured/Projectured.jl" target="_blank" rel="noopener">front page of Projectured.jl</a>
           lists the packages, and says how to load each one by name instead. The first window of a session takes a
-          while, because Julia compiles the code of the editor; later windows open fast.</p>
+          while, because Julia compiles the code of the editor; later windows open fast.
+          <a href="https://github.com/projectured/AutoPrecompile.jl" target="_blank" rel="noopener">AutoPrecompile</a>
+          keeps that code for the next session.</p>
         <h3 class="try__title">The application from the source</h3>
         <pre class="ex__code"><code>git clone https://github.com/projectured/AutoIntegration.jl auto-integration
 git clone https://github.com/projectured/projectured-julia
@@ -1264,6 +1268,9 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
             <tr><td><a href="https://github.com/projectured/AutoIntegration.jl" target="_blank" rel="noopener">AutoIntegration.jl</a></td>
               <td>The package that loads an installed package when its triggers are loaded. <code>Projectured</code> depends on it.</td>
               <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>auto-integration</code>.</td></tr>
+            <tr><td><a href="https://github.com/projectured/AutoPrecompile.jl" target="_blank" rel="noopener">AutoPrecompile.jl</a></td>
+              <td>The package that builds one package image for the packages that a session loads, from recorded precompile statements.</td>
+              <td>A person who wants the next session to show a data frame fast. Pkg installs it when you add it.</td></tr>
           </table>
         </div>
       </div>
