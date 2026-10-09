@@ -1230,6 +1230,9 @@ julia&gt; display_in_editor(DataFrame(n = 1:1000, square = (1:1000) .^ 2))</code
           opens in about a second, because each package holds the compiled code of its first window.</p>
         <h3 class="try__title">The application from the source</h3>
         <pre class="ex__code"><code>git clone https://github.com/projectured/AutoIntegration.jl auto-integration
+git clone https://github.com/projectured/AgentClientProtocol.jl agent-client-protocol
+git clone https://github.com/projectured/ClaudeCodeACP.jl claude-code-acp
+git clone https://github.com/projectured/ModelContextProtocol.jl model-context-protocol
 git clone https://github.com/projectured/projectured-julia
 cd projectured-julia
 bin/projectured</code></pre>
@@ -1267,6 +1270,15 @@ bin/projectured --assistant=anthropic    <span class="c"># with Claude: set ANTH
             <tr><td><a href="https://github.com/projectured/AutoIntegration.jl" target="_blank" rel="noopener">AutoIntegration.jl</a></td>
               <td>The package that loads an installed package when its triggers are loaded. <code>Projectured</code> depends on it.</td>
               <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>auto-integration</code>.</td></tr>
+            <tr><td><a href="https://github.com/projectured/AgentClientProtocol.jl" target="_blank" rel="noopener">AgentClientProtocol.jl</a></td>
+              <td>The Agent Client Protocol (ACP) in Julia, which the assistant of ProjecturEd speaks.</td>
+              <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>agent-client-protocol</code>.</td></tr>
+            <tr><td><a href="https://github.com/projectured/ClaudeCodeACP.jl" target="_blank" rel="noopener">ClaudeCodeACP.jl</a></td>
+              <td>An ACP agent that runs Claude Code, the built-in agent of the assistant.</td>
+              <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>claude-code-acp</code>.</td></tr>
+            <tr><td><a href="https://github.com/projectured/ModelContextProtocol.jl" target="_blank" rel="noopener">ModelContextProtocol.jl</a></td>
+              <td>A fork of the MCP package of JuliaSMLM, which gives a tool handler the <code>_meta</code> of its request.</td>
+              <td>Pkg installs it. A clone of projectured-julia needs it beside it, in <code>model-context-protocol</code>.</td></tr>
           </table>
         </div>
       </div>
