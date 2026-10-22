@@ -963,9 +963,10 @@
     <div class="wrap">
       <div class="section-head" data-reveal>
         <p class="eyebrow">Videos</p>
-        <h2>Short sessions, recorded by the editor itself.</h2>
-        <p>The keys of each video come from a script and play at the speed of a person typing. The editor
-          draws each frame, and nothing is cut or sped up.</p>
+        <h2>Short sessions, with nothing cut or sped up.</h2>
+        <p>The editor records most of the videos itself. Their keys come from a script and play at the speed
+          of a person typing, and the editor draws each frame. The video from the Julia REPL is a recording
+          of the screen, where a person types.</p>
       </div>
       <div class="videos">
 
@@ -991,6 +992,25 @@
               <source src="assets/videos/data-frame.mp4" type="video/mp4">
             </video>
             <figcaption>5 forms, 9 clicks, the wheel and a drag of the scroll bar, in 103 seconds</figcaption>
+          </figure>
+        </article>
+
+        <article class="video-item" id="video-data-frame-repl" data-reveal>
+          <h3>A data frame from the Julia REPL</h3>
+          <p>The table also opens from the Julia REPL, and the REPL stays free for the next form.
+            <code>display_in_editor</code> shows a frame of a million rows in a window. Three filters,
+            <code>&gt; 50</code> on the price, <code>&lt; 10</code> on the quantity and
+            <code>= false</code> on <code>in_stock</code>, keep 17488 of its rows.</p>
+          <p>The REPL then makes a second frame of ten rows, and <code>display_in_editor</code> opens it in a
+            new tab of the same window. A quantity typed in the table goes into the frame itself, so
+            <code>df2</code> in the REPL shows it. Last, a drag of the tab puts the two frames one above the
+            other.</p>
+          <figure class="showcase">
+            <video controls muted playsinline preload="metadata" width="1920" height="1200"
+                   style="aspect-ratio: 16 / 10" poster="assets/videos/data-frame-repl-poster.jpg">
+              <source src="assets/videos/data-frame-repl.mp4" type="video/mp4">
+            </video>
+            <figcaption>7 forms in the REPL, 3 filters, an edit and a drag in the window, in 81 seconds</figcaption>
           </figure>
           <p>To open a data frame from the Julia REPL, load <code>SimpleDirectMediaLayer</code> too, because
             it draws the window. Then give the frame to <code>display_in_editor</code>:</p>
